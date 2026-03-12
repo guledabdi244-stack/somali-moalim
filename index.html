@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SomaliTutor</title>
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:#f0f4f8;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState } = React;
+
+const tutors = [
+  { id:1, name:"Teacher Khadra", rating:4.9, language:"Somali", price:15, subject:"Quran", color:"#1a4a7a" },
+  { id:2, name:"Teacher Ahmed", rating:4.8, language:"Somali", price:12, subject:"English", color:"#2d6a4f" },
+  { id:3, name:"Teacher Fadumo", rating:4.7, language:"Somali", price:10, subject:"Mathematics", color:"#7c3aed" },
+  { id:4, name:"Teacher Omar", rating:4.6, language:"Arabic", price:18, subject:"Arabic", color:"#b45309" },
+];
+
+const Avatar = ({ name, color, size=44 }) => (
+  <div style={{width:size,height:size,borderRadius:"50%",background:color,display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontWeight:700,fontSize:size*0.38,flexShrink:0}}>
+    {name[0]}
+  </div>
+);
+
+const Stars = ({ rating }) => (
+  <span>{"★".repeat(Math.floor(rating))}<span style={{color:"#ddd"}}>{"★".repeat(5-Math.floor(rating))}</span></span>
+);
+
+function App() {
+  const [activeNav, setActiveNav] = useState("Find Tutors");
+  const [selectedTutor, setSelectedTutor] = useState(tutors[0]);
+  const [payment, setPayment] = useState("card");
+  const [timeSlot, setTimeSlot] = useState("4:30 PM - 5:00 PM");
+  const [booked, setBooked] = useState(false);
+  const [search, setSearch] = useState("");
+  const [showAll, setShowAll] = useState(false);
+
+  const navItems = [
+    {label:"Dashboard",icon:"🏠"},{label:"Find Tutors",icon:"🔍"},
+    {label:"My Lessons",icon:"📅"},{label:"Messages",icon:"💬"},
+    {label:"Payments",icon:"💳"},{label:"Settings",icon:"⚙️"},
+  ];
+
+  const filtered = tutors.filter(t =>
+    t.name.toLowerCase().includes(search.toLowerCase()) ||
+    t.subject.toLowerCase().includes(search.toLowerCase())
+  );
+  const displayed = showAll ? filtered : filtered.slice(0,2);
+
+  return (
+    <div style={{fontFamily:"'DM Sans',sans-serif",height:"100vh",display:"flex",flexDirection:"column",background:"#f0f4f8"}}>
+      {/* Topbar */}
+      <div style={{background:"#fff",borderBottom:"1px solid #e8ecf0",display:"flex",alignItems:"center",padding:"0 24px",height:60,gap:16,flexShrink:0}}>
+        <div style={{display:"flex",alignItems:"center",gap:8,minWidth:200}}>
+          <div style={{background:"linear-gradient(135deg,#1a4a7a,#2563eb)",borderRadius:8,width:34,height:34,display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:18}}>📚</div>
+          <span style={{fontFamily:"'Merriweather',serif",fontWeight:700,fontSize:17,color:"#1a4a7a"}}>Somali<span style={{color:"#2563eb"}}>Tutor</span></span>
+        </div>
+        <div style={{flex:1,maxWidth:420,position:"relative"}}>
+          <span style={{position:"absolute",left:12,top:"50%",transform:"translateY(-50%)",color:"#94a3b8"}}>🔍</span>
+          <input value={search} onChange={e=>{setSearch(e.target.value);setShowAll(true);}} placeholder="Search Tutors"
+            style={{width:"100%",padding:"9px 16px 9px 36px",border:"1.5px solid #e2e8f0",borderRadius:10,fontSize:14,outline:"none",background:"#f8fafc",boxSizing:"border-box"}}/>
+        </div>
+        <div style={{flex:1}}/>
+        {["🔍","✉️","🔔"].map((ic,i)=><button key={i} style={{background:"none",border:"none",cursor:"pointer",fontSize:18,padding:"6px 8px"}}>{ic}</button>)}
+        <Avatar name="Ayaan" color="#7c3aed" size={36}/>
+      </div>
+
+      <div style={{display:"flex",flex:1,overflow:"hidden"}}>
+        {/* Sidebar */}
+        <aside style={{width:220,background:"#fff",borderRight:"1px solid #e8ecf0",display:"flex",flexDirection:"column",padding:"20px 0",flexShrink:0}}>
+          <nav style={{flex:1}}>
+            {navItems.map(item=>{
+              const active = activeNav===item.label;
+              return <button key={item.label} onClick={()=>setActiveNav(item.label)}
+                style={{display:"flex",alignItems:"center",gap:12,width:"100%",padding:"11px 20px",background:active?"#eff6ff":"none",border:"none",borderLeft:active?"3px solid #2563eb":"3px solid transparent",cursor:"pointer",color:active?"#1d4ed8":"#64748b",fontWeight:active?600:400,fontSize:14.5,textAlign:"left",fontFamily:"'DM Sans',sans-serif"}}>
+                <span style={{fontSize:16}}>{item.icon}</span>{item.label}
+              </button>;
+            })}
+          </nav>
+          <div style={{padding:"0 16px 12px"}}>
+            <button style={{width:"100%",padding:"10px",background:"none",border:"1.5px solid #e2e8f0",borderRadius:10,cursor:"pointer",color:"#64748b",fontSize:14,fontFamily:"'DM Sans',sans-serif"}}>🚪 Log Out</button>
+          </div>
+          <div style={{margin:"0 14px 16px",background:"#f8fafc",borderRadius:12,padding:"14px 12px",border:"1px solid #e2e8f0"}}>
+            <div style={{fontWeight:700,fontSize:13,color:"#1e293b",marginBottom:10}}>Upcoming Lesson</div>
+            {tutors.slice(0,2).map(t=>(
+              <div key={t.id} style={{display:"flex",alignItems:"center",gap:8,marginBottom:8}}>
+                <Avatar name={t.name} color={t.color} size={34}/>
+                <div>
+                  <div style={{fontWeight:600,fontSize:12.5,color:"#1e293b"}}>{t.name}</div>
+                  <div style={{fontSize:11,color:"#64748b"}}>${t.price}/hr · 🎓 {t.subject}</div>
+                </div>
+              </div>
+            ))}
+            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginTop:4}}>
+              <span style={{fontSize:11,color:"#64748b"}}>Today 4:30 PM</span>
+              <button style={{background:"#22c55e",color:"#fff",border:"none",borderRadius:8,padding:"5px 12px",fontSize:12,fontWeight:600,cursor:"pointer"}}>Join Now</button>
+            </div>
+          </div>
+        </aside>
+
+        {/* Main */}
+        <main style={{flex:1,display:"flex",overflow:"hidden"}}>
+          <div style={{flex:1,padding:"24px 20px",overflowY:"auto",display:"flex",flexDirection:"column",gap:22}}>
+            <h1 style={{fontFamily:"'Merriweather',serif",fontSize:22,color:"#1e293b",fontWeight:700}}>Welcome back, Ayaan! 👋</h1>
+            <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
+              {["Availability ▾","Price ▾","Subject ▾","Language ▾"].map((f,i)=>(
+                <div key={i} style={{padding:"8px 16px",background:"#fff",border:"1.5px solid #e2e8f0",borderRadius:10,fontSize:13.5,color:"#64748b",cursor:"pointer"}}>{f}</div>
+              ))}
+            </div>
+            <section>
+              <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:14}}>
+                <h2 style={{fontSize:16,fontWeight:700,color:"#1e293b",margin:0}}>Featured Tutors</h2>
+                <button onClick={()=>setShowAll(!showAll)} style={{background:"none",border:"none",color:"#2563eb",fontSize:13.5,fontWeight:600,cursor:"pointer"}}>{showAll?"Show less":"View all"}</button>
+              </div>
+              <div style={{display:"flex",flexDirection:"column",gap:12}}>
+                {displayed.map(t=>(
+                  <div key={t.id} onClick={()=>{setSelectedTutor(t);setBooked(false);}}
+                    style={{background:"#fff",borderRadius:14,padding:"14px 16px",display:"flex",alignItems:"center",gap:14,cursor:"pointer",border:selectedTutor?.id===t.id?"2px solid #2563eb":"2px solid #e2e8f0"}}>
+                    <Avatar name={t.name} color={t.color} size={48}/>
+                    <div style={{flex:1}}>
+                      <div style={{fontWeight:700,fontSize:15,color:"#1e293b"}}>{t.name}</div>
+                      <div style={{fontSize:12,color:"#f5a623"}}><Stars rating={t.rating}/> <span style={{color:"#64748b"}}>{t.rating} · {t.language}</span></div>
+                      <div style={{fontSize:12,color:"#64748b"}}>${t.price}/hr · 🎓 {t.subject}</div>
+                    </div>
+                    <span style={{fontWeight:700,color:"#f5a623"}}>★ ${t.price}/hr</span>
+                  </div>
+                ))}
+              </div>
+              <div style={{display:"flex",gap:12,marginTop:18}}>
+                <button style={{flex:1,padding:"13px",background:"#1a4a7a",color:"#fff",border:"none",borderRadius:12,fontSize:15,fontWeight:700,cursor:"pointer"}}>Book a Lesson</button>
+                <button style={{flex:1,padding:"13px",background:"#22c55e",color:"#fff",border:"none",borderRadius:12,fontSize:15,fontWeight:700,cursor:"pointer"}}>Free Trial Lesson ›</button>
+              </div>
+            </section>
+            <section>
+              <h2 style={{fontSize:16,fontWeight:700,color:"#1e293b",margin:"0 0 14px"}}>Upcoming Lesson</h2>
+              <div style={{background:"#fff",borderRadius:14,padding:18,border:"1.5px solid #e2e8f0"}}>
+                <div style={{display:"flex",gap:14}}>
+                  <Avatar name="Hassan" color="#7c3aed" size={46}/>
+                  <div>
+                    <div style={{fontWeight:700,fontSize:15,color:"#1e293b"}}>Hassan M.</div>
+                    <div style={{fontSize:13.5,color:"#475569",marginTop:4}}>"Great teacher. My semy loves her classes overall!"</div>
+                    <div style={{marginTop:6,color:"#f5a623"}}><Stars rating={4.5}/></div>
+                  </div>
+                </div>
+                <div style={{marginTop:14,background:"#f8fafc",borderRadius:8,height:8,position:"relative",overflow:"hidden"}}>
+                  <div style={{position:"absolute",left:0,top:0,height:"100%",width:"75%",background:"linear-gradient(90deg,#2563eb,#60a5fa)",borderRadius:8}}/>
+                </div>
+                <div style={{fontSize:11,color:"#94a3b8",marginTop:4}}>Lesson progress: 75%</div>
+              </div>
+            </section>
+          </div>
+
+          {/* Right Panel */}
+          <div style={{width:320,padding:"24px 20px 24px 0",overflowY:"auto",display:"flex",flexDirection:"column",gap:20}}>
+            <div style={{background:"#fff",borderRadius:16,padding:22,border:"1.5px solid #e2e8f0",boxShadow:"0 2px 12px rgba(0,0,0,0.05)"}}>
+              <h2 style={{fontSize:16,fontWeight:700,color:"#1e293b",margin:"0 0 6px"}}>Book Your Lesson</h2>
+              <p style={{fontSize:13,color:"#64748b",margin:"0 0 16px"}}>with <strong>{selectedTutor?.name}</strong></p>
+              <select value={timeSlot} onChange={e=>{setTimeSlot(e.target.value);setBooked(false);}}
+                style={{width:"100%",padding:"10px 14px",border:"1.5px solid #e2e8f0",borderRadius:10,fontSize:14,marginBottom:18,background:"#f8fafc",outline:"none"}}>
+                <option>4:30 PM - 5:00 PM</option>
+                <option>5:00 PM - 5:30 PM</option>
+                <option>6:00 PM - 6:30 PM</option>
+                <option>7:00 PM - 7:30 PM</option>
+              </select>
+              <div style={{fontWeight:700,fontSize:14,color:"#1e293b",marginBottom:10}}>Payment Method</div>
+              {[{key:"card",icon:"💳",label:"Credit / Debit Card"},{key:"paypal",icon:"🅿️",label:"PayPal"},{key:"mobile",icon:"📱",label:"Mobile Money"}].map(pm=>(
+                <button key={pm.key} onClick={()=>setPayment(pm.key)}
+                  style={{display:"flex",alignItems:"center",width:"100%",padding:"11px 14px",border:payment===pm.key?"2px solid #2563eb":"1.5px solid #e2e8f0",borderRadius:10,background:payment===pm.key?"#eff6ff":"#fff",cursor:"pointer",marginBottom:8,gap:12}}>
+                  <span style={{fontSize:18}}>{pm.icon}</span>
+                  <span style={{flex:1,fontSize:14,fontWeight:500,color:"#1e293b",textAlign:"left"}}>{pm.label}</span>
+                  <span style={{color:"#94a3b8"}}>›</span>
+                </button>
+              ))}
+              <button onClick={()=>setBooked(true)}
+                style={{width:"100%",padding:"14px",marginTop:8,background:booked?"#22c55e":"linear-gradient(135deg,#1a4a7a,#2563eb)",color:"#fff",border:"none",borderRadius:12,fontSize:15,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 14px rgba(37,99,235,0.3)"}}>
+                {booked?"✓ Lesson Booked!":`Confirm & Pay $${selectedTutor?.price}`}
+              </button>
+            </div>
+            <div style={{background:"#0f172a",borderRadius:16,padding:18}}>
+              <h2 style={{fontSize:15,fontWeight:700,color:"#f1f5f9",margin:"0 0 14px"}}>Live Lesson</h2>
+              <div style={{background:"linear-gradient(135deg,#1e3a5f,#0f2744)",borderRadius:12,height:160,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"0 20px",position:"relative"}}>
+                <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:8}}>
+                  <Avatar name="Khadra" color="#2563eb" size={60}/>
+                  <span style={{color:"#93c5fd",fontSize:11}}>Teacher Khadra</span>
+                </div>
+                <div style={{background:"rgba(255,255,255,0.95)",borderRadius:12,padding:"14px 20px",display:"flex",gap:16}}>
+                  <span style={{fontSize:28,fontWeight:700}}>بَ</span>
+                  <span style={{fontSize:28,fontWeight:700}}>ثَ</span>
+                </div>
+                <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:8}}>
+                  <Avatar name="Ayaan" color="#7c3aed" size={44}/>
+                  <span style={{color:"#c4b5fd",fontSize:11}}>Ayaan</span>
+                </div>
+                <div style={{position:"absolute",top:10,left:10,background:"#ef4444",color:"#fff",fontSize:10,fontWeight:700,padding:"3px 7px",borderRadius:5,display:"flex",alignItems:"center",gap:4}}>
+                  <div style={{width:6,height:6,borderRadius:"50%",background:"#fff",animation:"pulse 1s infinite"}}/>LIVE
+                </div>
+              </div>
+              <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:10,marginTop:14}}>
+                {["🎙️","📹","💬","🎙️"].map((ic,i)=>(
+                  <button key={i} style={{background:"#1e293b",border:"none",color:"#94a3b8",fontSize:16,borderRadius:8,width:38,height:38,cursor:"pointer"}}>{ic}</button>
+                ))}
+                <button style={{background:"#ef4444",border:"none",color:"#fff",fontSize:13,fontWeight:700,borderRadius:8,padding:"9px 16px",cursor:"pointer"}}>End</button>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
