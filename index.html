@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>SomaliTutor</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SomaliTutor – Learn Somali, Quran & more</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'DM Sans',sans-serif;background:#f0f4f8;color:#1e293b;}
@@ -22,13 +21,13 @@ input:focus,select:focus{outline:none;border-color:#2563eb!important;box-shadow:
 /* AUTH */
 .auth-layout{width:100%;display:flex;min-height:100vh;}
 .auth-left{flex:1;background:linear-gradient(160deg,#0f2744,#1a4a7a,#2563eb);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px;position:relative;overflow:hidden;}
-.auth-left::before{content:””;position:absolute;bottom:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,0.04);}
+.auth-left::before{content:"";position:absolute;bottom:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,0.04);}
 .auth-right{width:460px;background:#fff;display:flex;align-items:center;justify-content:center;padding:48px;}
 .auth-form{width:100%;max-width:360px;animation:fadeUp 0.4s ease;}
 .logo{display:flex;align-items:center;gap:8px;}
 .logo-icon{background:linear-gradient(135deg,#1a4a7a,#2563eb);border-radius:8px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;box-shadow:0 4px 14px rgba(37,99,235,0.3);}
 .logo-icon.lg{width:44px;height:44px;font-size:24px;border-radius:12px;}
-.logo-text{font-family:‘Merriweather’,serif;font-weight:700;font-size:17px;color:#1a4a7a;}
+.logo-text{font-family:'Merriweather',serif;font-weight:700;font-size:17px;color:#1a4a7a;}
 .logo-text.lg{font-size:26px;}
 .logo-text span{color:#2563eb;}
 .field-label{font-size:13px;font-weight:600;color:#374151;display:block;margin-bottom:5px;}
@@ -57,7 +56,7 @@ input:focus,select:focus{outline:none;border-color:#2563eb!important;box-shadow:
 .nav-btn.active{background:#eff6ff;border-left-color:#2563eb;color:#1d4ed8;font-weight:600;}
 .center-col{flex:1;padding:18px;overflow-y:auto;display:flex;flex-direction:column;gap:14px;}
 .right-col{width:285px;padding:18px 18px 18px 0;overflow-y:auto;display:flex;flex-direction:column;gap:14px;flex-shrink:0;}
-.avatar{border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-family:‘Merriweather’,serif;flex-shrink:0;}
+.avatar{border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-family:'Merriweather',serif;flex-shrink:0;}
 .badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;}
 .badge-top{background:#eff6ff;color:#1d4ed8;}
 .badge-popular{background:#ecfdf5;color:#059669;}
@@ -90,11 +89,11 @@ input:focus,select:focus{outline:none;border-color:#2563eb!important;box-shadow:
 .profile-hero-banner{height:110px;position:relative;}
 .profile-hero-content{padding:0 24px 24px;position:relative;}
 .profile-avatar-wrap{position:relative;display:inline-block;margin-top:-36px;margin-bottom:12px;}
-.profile-av{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:28px;font-family:‘Merriweather’,serif;border:4px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,0.15);}
+.profile-av{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:28px;font-family:'Merriweather',serif;border:4px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,0.15);}
 .online-dot{position:absolute;bottom:4px;right:4px;width:14px;height:14px;background:#22c55e;border-radius:50%;border:2px solid #fff;}
 .stat-row{display:flex;gap:20px;flex-wrap:wrap;margin-top:14px;}
 .stat-item{text-align:center;}
-.stat-num{font-family:‘Merriweather’,serif;font-size:20px;font-weight:700;color:#1e293b;}
+.stat-num{font-family:'Merriweather',serif;font-size:20px;font-weight:700;color:#1e293b;}
 .stat-lbl{font-size:11px;color:#64748b;margin-top:1px;}
 .section-card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 1px 6px rgba(0,0,0,0.05);}
 .section-title{font-size:15px;font-weight:700;color:#1e293b;margin-bottom:14px;}
@@ -137,7 +136,7 @@ input:focus,select:focus{outline:none;border-color:#2563eb!important;box-shadow:
 .msg-time{font-size:10.5px;color:#94a3b8;margin-top:2px;}
 .msg-time.me{text-align:right;}
 .msg-input-row{background:#fff;border-top:1px solid #e8ecf0;padding:12px 16px;display:flex;gap:10px;align-items:center;flex-shrink:0;}
-.msg-input{flex:1;padding:10px 14px;border:1.5px solid #e2e8f0;border-radius:22px;font-size:13.5px;background:#f8fafc;outline:none;font-family:‘DM Sans’,sans-serif;}
+.msg-input{flex:1;padding:10px 14px;border:1.5px solid #e2e8f0;border-radius:22px;font-size:13.5px;background:#f8fafc;outline:none;font-family:'DM Sans',sans-serif;}
 .msg-send-btn{background:linear-gradient(135deg,#1a4a7a,#2563eb);color:#fff;border:none;border-radius:50%;width:38px;height:38px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 
 /* MY LESSONS */
@@ -149,7 +148,7 @@ input:focus,select:focus{outline:none;border-color:#2563eb!important;box-shadow:
 .tab-btn.active{background:linear-gradient(135deg,#1a4a7a,#2563eb);color:#fff;box-shadow:0 2px 8px rgba(37,99,235,0.25);}
 .lesson-card{background:#fff;border-radius:14px;padding:16px 18px;margin-bottom:11px;border:1.5px solid #e2e8f0;display:flex;align-items:center;gap:14px;box-shadow:0 1px 5px rgba(0,0,0,0.04);}
 .lesson-date-box{background:#eff6ff;border-radius:10px;padding:8px 12px;text-align:center;flex-shrink:0;min-width:52px;}
-.lesson-date-day{font-family:‘Merriweather’,serif;font-size:20px;font-weight:700;color:#1a4a7a;}
+.lesson-date-day{font-family:'Merriweather',serif;font-size:20px;font-weight:700;color:#1a4a7a;}
 .lesson-date-mon{font-size:10px;font-weight:700;color:#64748b;text-transform:uppercase;}
 .lesson-info{flex:1;}
 .lesson-status{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:700;}
@@ -164,7 +163,7 @@ input:focus,select:focus{outline:none;border-color:#2563eb!important;box-shadow:
 .stat-cards-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
 .stat-card{background:#fff;border-radius:14px;padding:16px 18px;border:1.5px solid #e2e8f0;box-shadow:0 1px 5px rgba(0,0,0,0.04);}
 .stat-card-icon{font-size:22px;margin-bottom:6px;}
-.stat-card-val{font-family:‘Merriweather’,serif;font-size:22px;font-weight:700;color:#1e293b;}
+.stat-card-val{font-family:'Merriweather',serif;font-size:22px;font-weight:700;color:#1e293b;}
 .stat-card-lbl{font-size:12px;color:#64748b;margin-top:2px;}
 .txn-row{display:flex;align-items:center;gap:13px;padding:13px 0;border-bottom:1px solid #f1f5f9;}
 .txn-row:last-child{border-bottom:none;}
@@ -175,52 +174,11 @@ input:focus,select:focus{outline:none;border-color:#2563eb!important;box-shadow:
 .txn-amt{font-size:14px;font-weight:700;}
 .txn-amt.paid{color:#dc2626;}
 .txn-amt.refund{color:#22c55e;}
-
-/* NOTIFICATIONS */
-#notif-page{flex-direction:column;height:100vh;}
-.notif-body{flex:1;overflow-y:auto;padding:22px;}
-.notif-inner{max-width:640px;margin:0 auto;}
-.notif-item{background:#fff;border-radius:13px;padding:14px 16px;margin-bottom:9px;display:flex;align-items:flex-start;gap:13px;border:1.5px solid #e2e8f0;box-shadow:0 1px 4px rgba(0,0,0,0.04);cursor:pointer;transition:all 0.15s;}
-.notif-item:hover{border-color:#bfdbfe;box-shadow:0 3px 12px rgba(37,99,235,0.08);}
-.notif-item.unread{border-left:3px solid #2563eb;background:#fafcff;}
-.notif-icon-wrap{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
-.notif-dot{width:8px;height:8px;border-radius:50%;background:#2563eb;flex-shrink:0;margin-top:6px;}
-
-/* MY PROFILE / SETTINGS */
-#settings-page{flex-direction:column;height:100vh;}
-.settings-body{flex:1;overflow-y:auto;padding:22px;}
-.settings-inner{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:18px;}
-.settings-section{background:#fff;border-radius:14px;padding:20px;border:1.5px solid #e2e8f0;box-shadow:0 1px 5px rgba(0,0,0,0.04);}
-.settings-section-title{font-size:14px;font-weight:700;color:#1e293b;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;}
-.settings-field{margin-bottom:14px;}
-.settings-label{font-size:12.5px;font-weight:600;color:#374151;display:block;margin-bottom:5px;}
-.settings-input{width:100%;padding:10px 13px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:13.5px;background:#f8fafc;font-family:‘DM Sans’,sans-serif;}
-.settings-input:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,0.1);}
-.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f8fafc;}
-.toggle-row:last-child{border-bottom:none;}
-.toggle{position:relative;width:42px;height:24px;flex-shrink:0;}
-.toggle input{opacity:0;width:0;height:0;}
-.toggle-slider{position:absolute;inset:0;background:#cbd5e1;border-radius:24px;cursor:pointer;transition:0.2s;}
-.toggle-slider:before{content:””;position:absolute;width:18px;height:18px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:0.2s;}
-.toggle input:checked+.toggle-slider{background:#2563eb;}
-.toggle input:checked+.toggle-slider:before{transform:translateX(18px);}
-.save-btn{width:100%;padding:13px;background:linear-gradient(135deg,#1a4a7a,#2563eb);color:#fff;border:none;border-radius:12px;font-size:14.5px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(37,99,235,0.3);font-family:‘DM Sans’,sans-serif;}
-.save-btn:hover{opacity:0.92;}
-
-/* MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,0.55);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeUp 0.2s ease;}
-.modal-box{background:#fff;border-radius:20px;padding:28px;max-width:460px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.2);position:relative;}
-.modal-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#94a3b8;line-height:1;}
-.star-picker{display:flex;gap:6px;margin:10px 0 18px;}
-.star-pick{font-size:30px;cursor:pointer;color:#ddd;transition:color 0.12s;line-height:1;}
-.star-pick.on{color:#f5a623;}
 </style>
-
 </head>
 <body>
 
-<!-- LOGIN -->
-
+<!-- LOGIN (default active) -->
 <div id="login-page" class="page active">
   <div class="auth-layout">
     <div class="auth-left">
@@ -251,8 +209,7 @@ input:focus,select:focus{outline:none;border-color:#2563eb!important;box-shadow:
   </div>
 </div>
 
-<!-- SIGNUP -->
-
+<!-- SIGNUP page -->
 <div id="signup-page" class="page">
   <div class="auth-layout">
     <div class="auth-left">
@@ -296,15 +253,14 @@ input:focus,select:focus{outline:none;border-color:#2563eb!important;box-shadow:
   </div>
 </div>
 
-<!-- DASHBOARD -->
-
+<!-- DASHBOARD (main) -->
 <div id="dashboard-page" class="page">
   <div class="topbar">
     <div style="min-width:190px;" class="logo"><div class="logo-icon">📚</div><span class="logo-text">Somali<span>Tutor</span></span></div>
     <div class="topbar-search"><span class="topbar-icon">🔍</span><input id="search-input" type="text" placeholder="Search tutors, subjects..." oninput="filterTutors()"/></div>
     <div style="flex:1;"></div>
-    <button onclick="setNav(document.querySelectorAll('.nav-btn')[3]);openMessages()" style="background:none;border:none;cursor:pointer;font-size:17px;padding:5px 7px;">✉️</button>
-    <button onclick="openNotifications()" style="position:relative;background:none;border:none;cursor:pointer;font-size:17px;padding:5px 7px;">🔔<span id="notif-bell-badge" style="position:absolute;top:0;right:0;background:#ef4444;color:#fff;border-radius:50%;width:16px;height:16px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;">3</span></button>
+    <button style="background:none;border:none;cursor:pointer;font-size:17px;padding:5px 7px;">✉️</button>
+    <button style="background:none;border:none;cursor:pointer;font-size:17px;padding:5px 7px;">🔔</button>
     <div id="topbar-avatar" class="avatar" style="width:33px;height:33px;font-size:13px;"></div>
     <span id="topbar-name" style="font-size:13px;font-weight:500;color:#374151;"></span>
   </div>
@@ -316,7 +272,7 @@ input:focus,select:focus{outline:none;border-color:#2563eb!important;box-shadow:
         <button class="nav-btn" onclick="setNav(this);openLessons()"><span>📅</span>My Lessons</button>
         <button class="nav-btn" onclick="setNav(this);openMessages()"><span>💬</span>Messages</button>
         <button class="nav-btn" onclick="setNav(this);openPayments()"><span>💳</span>Payments</button>
-        <button class="nav-btn" onclick="setNav(this);openSettings()"><span>⚙️</span>Settings</button>
+        <button class="nav-btn" onclick="setNav(this)"><span>⚙️</span>Settings</button>
       </nav>
       <div style="flex:1;"></div>
       <div style="padding:0 14px 10px;"><button onclick="doLogout()" style="width:100%;padding:9px;background:none;border:1.5px solid #e2e8f0;border-radius:10px;cursor:pointer;color:#64748b;font-size:13.5px;">🚪 Log Out</button></div>
@@ -371,7 +327,6 @@ input:focus,select:focus{outline:none;border-color:#2563eb!important;box-shadow:
 </div>
 
 <!-- TUTOR PROFILE PAGE -->
-
 <div id="profile-page" class="page">
   <div class="profile-topbar">
     <button class="back-btn" onclick="showPage('dashboard')">← Back to tutors</button>
@@ -387,7 +342,6 @@ input:focus,select:focus{outline:none;border-color:#2563eb!important;box-shadow:
 </div>
 
 <!-- MESSAGES PAGE -->
-
 <div id="messages-page" class="page">
   <div class="topbar">
     <div class="logo"><div class="logo-icon">📚</div><span class="logo-text">Somali<span>Tutor</span></span></div>
@@ -413,7 +367,6 @@ input:focus,select:focus{outline:none;border-color:#2563eb!important;box-shadow:
 </div>
 
 <!-- MY LESSONS PAGE -->
-
 <div id="lessons-page" class="page">
   <div class="topbar">
     <div class="logo"><div class="logo-icon">📚</div><span class="logo-text">Somali<span>Tutor</span></span></div>
@@ -437,7 +390,6 @@ input:focus,select:focus{outline:none;border-color:#2563eb!important;box-shadow:
 </div>
 
 <!-- PAYMENTS PAGE -->
-
 <div id="payments-page" class="page">
   <div class="topbar">
     <div class="logo"><div class="logo-icon">📚</div><span class="logo-text">Somali<span>Tutor</span></span></div>
@@ -468,94 +420,8 @@ input:focus,select:focus{outline:none;border-color:#2563eb!important;box-shadow:
   </div>
 </div>
 
-<!-- NOTIFICATIONS PAGE -->
-
-<div id="notif-page" class="page">
-  <div class="topbar">
-    <div class="logo"><div class="logo-icon">📚</div><span class="logo-text">Somali<span>Tutor</span></span></div>
-    <div style="flex:1;"></div>
-    <div id="notif-topbar-avatar" class="avatar" style="width:33px;height:33px;font-size:13px;background:#7c3aed;"></div>
-    <span id="notif-topbar-name" style="font-size:13px;font-weight:500;color:#374151;margin-left:8px;"></span>
-    <button onclick="showPage('dashboard')" style="margin-left:14px;padding:7px 14px;background:none;border:1.5px solid #e2e8f0;border-radius:9px;cursor:pointer;color:#64748b;font-size:13px;">← Dashboard</button>
-    <button onclick="doLogout()" style="margin-left:8px;padding:7px 14px;background:none;border:1.5px solid #e2e8f0;border-radius:9px;cursor:pointer;color:#64748b;font-size:13px;">Log Out</button>
-  </div>
-  <div class="notif-body">
-    <div class="notif-inner">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-        <h2 style="font-family:'Merriweather',serif;font-size:22px;color:#1e293b;">🔔 Notifications</h2>
-        <button onclick="markAllRead()" style="background:none;border:none;color:#2563eb;font-size:13px;font-weight:600;cursor:pointer;">Mark all as read</button>
-      </div>
-      <div id="notif-list"></div>
-    </div>
-  </div>
-</div>
-
-<!-- SETTINGS / MY PROFILE PAGE -->
-
-<div id="settings-page" class="page">
-  <div class="topbar">
-    <div class="logo"><div class="logo-icon">📚</div><span class="logo-text">Somali<span>Tutor</span></span></div>
-    <div style="flex:1;"></div>
-    <div id="settings-topbar-avatar" class="avatar" style="width:33px;height:33px;font-size:13px;background:#7c3aed;"></div>
-    <span id="settings-topbar-name" style="font-size:13px;font-weight:500;color:#374151;margin-left:8px;"></span>
-    <button onclick="showPage('dashboard')" style="margin-left:14px;padding:7px 14px;background:none;border:1.5px solid #e2e8f0;border-radius:9px;cursor:pointer;color:#64748b;font-size:13px;">← Dashboard</button>
-    <button onclick="doLogout()" style="margin-left:8px;padding:7px 14px;background:none;border:1.5px solid #e2e8f0;border-radius:9px;cursor:pointer;color:#64748b;font-size:13px;">Log Out</button>
-  </div>
-  <div class="settings-body">
-    <div class="settings-inner">
-      <!-- Profile card -->
-      <div class="settings-section">
-        <div class="settings-section-title">👤 My Profile</div>
-        <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
-          <div id="settings-avatar-big" class="avatar" style="width:68px;height:68px;font-size:26px;background:#7c3aed;"></div>
-          <div>
-            <div id="settings-display-name" style="font-family:'Merriweather',serif;font-size:18px;font-weight:700;color:#1e293b;"></div>
-            <div id="settings-display-email" style="font-size:13px;color:#64748b;margin-top:2px;"></div>
-            <div style="font-size:12px;color:#22c55e;font-weight:600;margin-top:3px;">🟢 Student Account</div>
-          </div>
-        </div>
-        <div class="settings-field"><label class="settings-label">Full Name</label><input class="settings-input" id="settings-name-input" placeholder="Your full name"/></div>
-        <div class="settings-field"><label class="settings-label">Email Address</label><input class="settings-input" id="settings-email-input" type="email" placeholder="your@email.com"/></div>
-        <div class="settings-field"><label class="settings-label">Phone Number</label><input class="settings-input" placeholder="+1 (555) 000-0000"/></div>
-        <div class="settings-field"><label class="settings-label">Learning Goals</label><textarea class="settings-input" rows="3" placeholder="e.g. Learn Quran for my children, improve English for work..." style="resize:none;"></textarea></div>
-      </div>
-      <!-- Preferences -->
-      <div class="settings-section">
-        <div class="settings-section-title">🌐 Language & Preferences</div>
-        <div class="settings-field"><label class="settings-label">Preferred Language</label>
-          <select class="settings-input"><option>Somali</option><option>English</option><option>Arabic</option></select>
-        </div>
-        <div class="settings-field"><label class="settings-label">Timezone</label>
-          <select class="settings-input"><option>UTC+0 London</option><option>UTC+3 Nairobi</option><option>UTC-5 New York</option><option>UTC-8 Los Angeles</option><option>UTC+1 Paris</option></select>
-        </div>
-      </div>
-      <!-- Notifications prefs -->
-      <div class="settings-section">
-        <div class="settings-section-title">🔔 Notification Settings</div>
-        <div class="toggle-row"><div><div style="font-size:13.5px;font-weight:600;color:#1e293b;">Lesson Reminders</div><div style="font-size:12px;color:#94a3b8;">Get notified 1 hour before lessons</div></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
-        <div class="toggle-row"><div><div style="font-size:13.5px;font-weight:600;color:#1e293b;">New Messages</div><div style="font-size:12px;color:#94a3b8;">Alert when tutors send you messages</div></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
-        <div class="toggle-row"><div><div style="font-size:13.5px;font-weight:600;color:#1e293b;">Payment Receipts</div><div style="font-size:12px;color:#94a3b8;">Email confirmation after each payment</div></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
-        <div class="toggle-row"><div><div style="font-size:13.5px;font-weight:600;color:#1e293b;">Promotions & Offers</div><div style="font-size:12px;color:#94a3b8;">Special deals and free trial offers</div></div><label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label></div>
-      </div>
-      <!-- Security -->
-      <div class="settings-section">
-        <div class="settings-section-title">🔒 Security</div>
-        <div class="settings-field"><label class="settings-label">Current Password</label><input class="settings-input" type="password" placeholder="••••••••"/></div>
-        <div class="settings-field"><label class="settings-label">New Password</label><input class="settings-input" type="password" placeholder="Min. 8 characters"/></div>
-        <div class="settings-field"><label class="settings-label">Confirm New Password</label><input class="settings-input" type="password" placeholder="Repeat new password"/></div>
-      </div>
-      <button class="save-btn" onclick="saveSettings()">Save Changes ✓</button>
-      <button onclick="doLogout()" style="width:100%;padding:12px;background:none;border:1.5px solid #fecaca;border-radius:12px;color:#dc2626;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px;">🚪 Sign Out</button>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL CONTAINER -->
-
-<div id="modal-container"></div>
-
 <script>
-// ── DATA ─────────────────────────────────────────────────
+// ----- DATA ----------------------------------------------------------------
 const TUTORS = [
   {id:1, name:"Teacher Khadra",     rating:4.9,reviews:142,language:"Somali", price:15,subject:"Quran",          color:"#1a4a7a",bio:"Certified Quran teacher with 8 years experience. Specializes in Tajweed and Hifz for all ages.",students:230,lessons:1840,badge:"Top Rated",
    about:"I have been teaching the Holy Quran for over 8 years to students of all ages, from young children to adults. My teaching method focuses on proper Tajweed rules, Makharij (pronunciation), and memorization techniques. I hold a certification from a recognized Islamic institute and have helped over 230 students improve their Quran recitation.",
@@ -605,7 +471,7 @@ let profileSelectedTime = null;
 let profilePayment = "card";
 let profileBooked = false;
 
-// ── HELPERS ──────────────────────────────────────────────
+// ---------- helpers ----------
 function av(name, color, size, fontSize) {
   return `<div class="avatar" style="width:${size}px;height:${size}px;font-size:${fontSize}px;background:${color};">${name[0]}</div>`;
 }
@@ -619,7 +485,7 @@ function bdg(text) {
   return `<span class="badge ${cls}">${text}</span>`;
 }
 
-// ── PAGE NAV ─────────────────────────────────────────────
+// ---------- page navigation ----------
 function showPage(name) {
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(name+'-page').classList.add('active');
@@ -629,7 +495,7 @@ function setNav(btn) {
   btn.classList.add('active');
 }
 
-// ── AUTH ─────────────────────────────────────────────────
+// ---------- auth ----------
 function togglePass(id,btn){const i=document.getElementById(id);i.type=i.type==='password'?'text':'password';btn.textContent=i.type==='password'?'👁️':'🙈';}
 function setRole(r){userRole=r;document.getElementById('role-student').classList.toggle('active',r==='student');document.getElementById('role-tutor').classList.toggle('active',r==='tutor');}
 function updateStrength(v){const w=document.getElementById('strength-wrap');w.style.display=v.length>0?'block':'none';[1,2,3,4].forEach(i=>{document.getElementById('s'+i).classList.toggle('on',v.length>=i*2);});const l=document.getElementById('strength-label');l.textContent=(v.length<4?'Too short':v.length<6?'Weak':v.length<8?'Good':'Strong')+' password';l.style.color=v.length>=8?'#22c55e':'#94a3b8';}
@@ -657,12 +523,7 @@ function doSignup(){
 }
 function doLogout(){currentUser=null;showPage('login');}
 
-// ── DASHBOARD ────────────────────────────────────────────
-function updateNotifBadge(){
-  const cnt=NOTIFICATIONS.filter(n=>n.unread).length;
-  const b=document.getElementById('notif-bell-badge');
-  if(b){b.textContent=cnt;b.style.display=cnt>0?'flex':'none';}
-}
+// ---------- dashboard ----------
 function enterDashboard(){
   const first=currentUser.name.charAt(0).toUpperCase()+currentUser.name.slice(1);
   document.getElementById('topbar-avatar').textContent=first[0];
@@ -675,10 +536,7 @@ function enterDashboard(){
   buildUpcoming();
   filterTutors();
   showPage('dashboard');
-  updateNotifBadge();
 }
-
-// Login pills
 document.getElementById('login-pills').innerHTML=["🕌 Quran & Tajweed","🇸🇴 Somali Language","🌙 Arabic","📖 English","📐 Mathematics"].map(f=>`<div style="background:rgba(255,255,255,0.1);border-radius:50px;padding:9px 20px;margin-bottom:8px;color:#fff;font-size:13.5px;border:1px solid rgba(255,255,255,0.15);">${f}</div>`).join('');
 
 function buildSubjectPills(){
@@ -688,7 +546,6 @@ function buildSubjectPills(){
     return `<button class="pill${active?' active':''}" onclick="setSubject('${s}')" style="background:${bg};color:${active?'#fff':'#64748b'};${active?'border:none;':''}">${S_ICON[s]} ${s}</button>`;
   }).join('');
 }
-
 function buildUpcoming(){
   document.getElementById('upcoming-list').innerHTML=TUTORS.slice(0,2).map(t=>`
     <div style="display:flex;align-items:center;gap:7px;margin-bottom:7px;">
@@ -696,9 +553,7 @@ function buildUpcoming(){
       <div><div style="font-weight:600;font-size:11.5px;color:#1e293b;">${t.name}</div><div style="font-size:10px;color:#64748b;">$${t.price}/hr · ${t.subject}</div></div>
     </div>`).join('');
 }
-
 function setSubject(s){activeSubject=s;buildSubjectPills();filterTutors();}
-
 function filterTutors(){
   const q=(document.getElementById('search-input').value||'').toLowerCase();
   const lang=document.getElementById('lang-filter').value;
@@ -740,9 +595,7 @@ function filterTutors(){
     </div>`;
   }).join('');
 }
-
 function selectTutor(id){selectedTutor=TUTORS.find(t=>t.id===id);isBooked=false;filterTutors();renderBooking();}
-
 function renderBooking(){
   const t=selectedTutor;if(!t)return;
   const slots=["4:30 PM - 5:00 PM","5:00 PM - 5:30 PM","6:00 PM - 6:30 PM","7:00 PM - 7:30 PM"];
@@ -766,13 +619,13 @@ function renderBooking(){
         <span style="font-size:15px;">${pm.i}</span><span style="flex:1;font-size:12.5px;font-weight:500;color:#1e293b;text-align:left;">${pm.l}</span>
       </button>`).join('')}
     <button onclick="isBooked=true;renderBooking();" style="width:100%;padding:12px;margin-top:5px;background:${isBooked?'#22c55e':'linear-gradient(135deg,#1a4a7a,#2563eb)'};color:#fff;border:none;border-radius:12px;font-size:13.5px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(37,99,235,0.25);margin-bottom:7px;font-family:'DM Sans',sans-serif;">
-      ${isBooked?'✓ Booked!':'Confirm &amp; Pay $'+t.price}
+      ${isBooked?'✓ Booked!':'Confirm & Pay $'+t.price}
     </button>
-    ${!isBooked?`<button onclick="openFreeTrialModal(${t.id})" style="width:100%;padding:9px;background:none;border:1.5px solid #22c55e;border-radius:12px;font-size:12.5px;font-weight:700;cursor:pointer;color:#16a34a;font-family:'DM Sans',sans-serif;">🎁 Free Trial Lesson</button>`:''}
+    ${!isBooked?`<button onclick="openProfile(${t.id})" style="width:100%;padding:9px;background:none;border:1.5px solid #22c55e;border-radius:12px;font-size:12.5px;font-weight:700;cursor:pointer;color:#16a34a;font-family:'DM Sans',sans-serif;">🎁 Free Trial Lesson</button>`:''}
   `;
 }
 
-// ── TUTOR PROFILE ─────────────────────────────────────────
+// ---------- tutor profile ----------
 function openProfile(id){
   profileTutor=TUTORS.find(t=>t.id===id);
   profileSelectedDay=null; profileSelectedTime=null; profilePayment='card'; profileBooked=false;
@@ -783,254 +636,83 @@ function openProfile(id){
   renderProfile();
   showPage('profile');
 }
-
 function renderProfile(){
   const t=profileTutor;
   const bannerGrad=`linear-gradient(135deg, ${t.color}, ${t.color}99)`;
   const allTimes=profileSelectedDay ? (t.availability[profileSelectedDay]||[]) : [];
-
   document.getElementById('profile-content').innerHTML=`
   <div class="profile-layout">
-    <!-- LEFT COLUMN -->
     <div style="display:flex;flex-direction:column;gap:18px;">
-
-      <!-- Hero card -->
-      <div class="profile-hero">
-        <div class="profile-hero-banner" style="background:${bannerGrad};">
-          <div style="position:absolute;bottom:0;right:0;width:200px;height:100%;opacity:0.07;font-size:120px;display:flex;align-items:center;justify-content:center;">${S_ICON[t.subject]}</div>
-        </div>
-        <div class="profile-hero-content">
-          <div class="profile-avatar-wrap">
-            <div class="profile-av" style="background:${t.color};">${t.name[8]||t.name[0]}</div>
-            <div class="online-dot"></div>
+      <div class="profile-hero"><div class="profile-hero-banner" style="background:${bannerGrad};"><div style="position:absolute;bottom:0;right:0;width:200px;height:100%;opacity:0.07;font-size:120px;display:flex;align-items:center;justify-content:center;">${S_ICON[t.subject]}</div></div>
+        <div class="profile-hero-content"><div class="profile-avatar-wrap"><div class="profile-av" style="background:${t.color};">${t.name[8]||t.name[0]}</div><div class="online-dot"></div></div>
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;"><div><h1 style="font-family:'Merriweather',serif;font-size:22px;color:#1e293b;margin-bottom:4px;">${t.name}</h1><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;">${bdg(t.badge)}<span style="background:${S_COLOR[t.subject]}22;color:${S_COLOR[t.subject]};padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700;">${S_ICON[t.subject]} ${t.subject}</span><span style="color:#64748b;font-size:13px;">🌐 ${t.language}</span></div><div style="display:flex;align-items:center;gap:6px;">${stars(t.rating,14)}<span style="font-weight:700;font-size:14px;color:#1e293b;">${t.rating}</span><span style="color:#64748b;font-size:13px;">(${t.reviews} reviews)</span></div></div>
+            <div style="text-align:right;"><div style="font-family:'Merriweather',serif;font-size:28px;font-weight:700;color:#1a4a7a;">$${t.price}<span style="font-size:14px;color:#64748b;font-weight:400;">/hr</span></div><div style="font-size:12px;color:#22c55e;font-weight:600;">🟢 Available now</div></div>
           </div>
-          <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;">
-            <div>
-              <h1 style="font-family:'Merriweather',serif;font-size:22px;color:#1e293b;margin-bottom:4px;">${t.name}</h1>
-              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
-                ${bdg(t.badge)}
-                <span style="background:${S_COLOR[t.subject]}22;color:${S_COLOR[t.subject]};padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700;">${S_ICON[t.subject]} ${t.subject}</span>
-                <span style="color:#64748b;font-size:13px;">🌐 ${t.language}</span>
-              </div>
-              <div style="display:flex;align-items:center;gap:6px;">${stars(t.rating,14)}<span style="font-weight:700;font-size:14px;color:#1e293b;">${t.rating}</span><span style="color:#64748b;font-size:13px;">(${t.reviews} reviews)</span></div>
-            </div>
-            <div style="text-align:right;">
-              <div style="font-family:'Merriweather',serif;font-size:28px;font-weight:700;color:#1a4a7a;">$${t.price}<span style="font-size:14px;color:#64748b;font-weight:400;">/hr</span></div>
-              <div style="font-size:12px;color:#22c55e;font-weight:600;">🟢 Available now</div>
-            </div>
-          </div>
-          <div class="stat-row">
-            ${[["👥",t.students,"Students"],["📚",t.lessons,"Lessons"],["⭐",t.rating,"Rating"],["✅",t.reviews,"Reviews"]].map(([ic,n,l])=>`
-              <div class="stat-item"><div style="font-size:18px;">${ic}</div><div class="stat-num">${n}</div><div class="stat-lbl">${l}</div></div>`).join('')}
-          </div>
+          <div class="stat-row">${[["👥",t.students,"Students"],["📚",t.lessons,"Lessons"],["⭐",t.rating,"Rating"],["✅",t.reviews,"Reviews"]].map(([ic,n,l])=>`<div class="stat-item"><div style="font-size:18px;">${ic}</div><div class="stat-num">${n}</div><div class="stat-lbl">${l}</div></div>`).join('')}</div>
         </div>
       </div>
-
-      <!-- About -->
-      <div class="section-card">
-        <div class="section-title">About ${t.name}</div>
-        <p style="font-size:14px;color:#475569;line-height:1.75;">${t.about}</p>
+      <div class="section-card"><div class="section-title">About ${t.name}</div><p style="font-size:14px;color:#475569;line-height:1.75;">${t.about}</p></div>
+      <div class="section-card"><div class="section-title">Specialties</div><div>${t.specialties.map(s=>`<span class="subject-tag" style="background:${S_COLOR[t.subject]}15;color:${S_COLOR[t.subject]};">✓ ${s}</span>`).join('')}</div></div>
+      <div class="section-card"><div class="section-title">Availability — Click a day to see times</div>
+        <div class="availability-grid">${DAYS.map(d=>{const times=t.availability[d]||[];const hasSlots=times.length>0;const isSelected=profileSelectedDay===d;return `<div class="day-cell ${hasSlots?'avail':'unavail'}${isSelected?' selected':''}" onclick="${hasSlots?`selectDay('${d}')`:''}"><div class="day-name">${d}</div><div style="font-size:13px;">${hasSlots?times.length+'✓':'—'}</div></div>`;}).join('')}</div>
+        ${profileSelectedDay?`<div style="margin-top:14px;"><div style="font-size:13px;font-weight:600;color:#374151;margin-bottom:8px;">Available times on ${profileSelectedDay}:</div><div class="time-slots">${allTimes.map(time=>`<div class="time-slot${profileSelectedTime===time?' selected':''}" onclick="selectTime('${time}')">${time}</div>`).join('')}</div></div>`:'<p style="font-size:13px;color:#94a3b8;margin-top:12px;">Click a day above to see available time slots</p>'}
       </div>
-
-      <!-- Specialties -->
-      <div class="section-card">
-        <div class="section-title">Specialties</div>
-        <div>${t.specialties.map(s=>`<span class="subject-tag" style="background:${S_COLOR[t.subject]}15;color:${S_COLOR[t.subject]};">✓ ${s}</span>`).join('')}</div>
-      </div>
-
-      <!-- Availability -->
-      <div class="section-card">
-        <div class="section-title">Availability — Click a day to see times</div>
-        <div class="availability-grid">
-          ${DAYS.map(d=>{
-            const times=t.availability[d]||[];
-            const hasSlots=times.length>0;
-            const isSelected=profileSelectedDay===d;
-            return `<div class="day-cell ${hasSlots?'avail':'unavail'}${isSelected?' selected':''}" onclick="${hasSlots?`selectDay('${d}')`:''}">
-              <div class="day-name">${d}</div>
-              <div style="font-size:13px;">${hasSlots?times.length+'✓':'—'}</div>
-            </div>`;
-          }).join('')}
-        </div>
-        ${profileSelectedDay?`
-          <div style="margin-top:14px;">
-            <div style="font-size:13px;font-weight:600;color:#374151;margin-bottom:8px;">Available times on ${profileSelectedDay}:</div>
-            <div class="time-slots">
-              ${allTimes.map(time=>`<div class="time-slot${profileSelectedTime===time?' selected':''}" onclick="selectTime('${time}')">${time}</div>`).join('')}
-            </div>
-          </div>`:'<p style="font-size:13px;color:#94a3b8;margin-top:12px;">Click a day above to see available time slots</p>'}
-      </div>
-
-      <!-- Reviews -->
-      <div class="section-card">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-          <div class="section-title" style="margin-bottom:0;">Student Reviews</div>
-          <div style="display:flex;align-items:center;gap:6px;">${stars(t.rating,16)}<span style="font-weight:700;font-size:16px;">${t.rating}</span><span style="color:#64748b;font-size:13px;">/ 5</span></div>
-        </div>
-        ${t.reviews.map(r=>`
-          <div class="review-item">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-              ${av(r.name,r.color,36,14)}
-              <div>
-                <div style="font-weight:600;font-size:13.5px;color:#1e293b;">${r.name}</div>
-                <div style="display:flex;align-items:center;gap:6px;">${stars(r.rating,11)}<span style="font-size:11px;color:#94a3b8;">${r.date}</span></div>
-              </div>
-            </div>
-            <p style="font-size:13.5px;color:#475569;line-height:1.65;">"${r.text}"</p>
-          </div>`).join('')}
-      </div>
+      <div class="section-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;"><div class="section-title" style="margin-bottom:0;">Student Reviews</div><div style="display:flex;align-items:center;gap:6px;">${stars(t.rating,16)}<span style="font-weight:700;font-size:16px;">${t.rating}</span><span style="color:#64748b;font-size:13px;">/ 5</span></div></div>${t.reviews.map(r=>`<div class="review-item"><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">${av(r.name,r.color,36,14)}<div><div style="font-weight:600;font-size:13.5px;color:#1e293b;">${r.name}</div><div style="display:flex;align-items:center;gap:6px;">${stars(r.rating,11)}<span style="font-size:11px;color:#94a3b8;">${r.date}</span></div></div></div><p style="font-size:13.5px;color:#475569;line-height:1.65;">"${r.text}"</p></div>`).join('')}</div>
     </div>
-
-    <!-- RIGHT COLUMN: Booking -->
     <div class="book-sidebar">
-      <div class="book-card">
-        <div style="font-family:'Merriweather',serif;font-size:17px;font-weight:700;color:#1e293b;margin-bottom:4px;">Book a Lesson</div>
-        <div style="font-size:13px;color:#64748b;margin-bottom:16px;">with ${t.name}</div>
-        <div style="background:#f8fafc;border-radius:10px;padding:12px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;">
-          <div><div style="font-size:12px;color:#64748b;">Hourly rate</div><div style="font-family:'Merriweather',serif;font-size:22px;font-weight:700;color:#1a4a7a;">$${t.price}</div></div>
-          <div style="text-align:right;"><div style="font-size:12px;color:#22c55e;font-weight:600;">🟢 Available</div><div style="font-size:11px;color:#64748b;margin-top:2px;">${t.students} students</div></div>
-        </div>
-
-        ${profileSelectedDay&&profileSelectedTime?`
-          <div style="background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:10px;padding:11px;margin-bottom:14px;font-size:13px;color:#1d4ed8;">
-            📅 ${profileSelectedDay} at ${profileSelectedTime}
-            <button onclick="profileSelectedDay=null;profileSelectedTime=null;renderProfile();" style="float:right;background:none;border:none;color:#94a3b8;cursor:pointer;font-size:12px;">✕</button>
-          </div>`:`
-          <div style="background:#fef9c3;border:1.5px solid #fef08a;border-radius:10px;padding:11px;margin-bottom:14px;font-size:12.5px;color:#92400e;">
-            📅 Select a day & time on the left to book
-          </div>`}
-
+      <div class="book-card"><div style="font-family:'Merriweather',serif;font-size:17px;font-weight:700;color:#1e293b;margin-bottom:4px;">Book a Lesson</div><div style="font-size:13px;color:#64748b;margin-bottom:16px;">with ${t.name}</div>
+        <div style="background:#f8fafc;border-radius:10px;padding:12px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;"><div><div style="font-size:12px;color:#64748b;">Hourly rate</div><div style="font-family:'Merriweather',serif;font-size:22px;font-weight:700;color:#1a4a7a;">$${t.price}</div></div><div style="text-align:right;"><div style="font-size:12px;color:#22c55e;font-weight:600;">🟢 Available</div><div style="font-size:11px;color:#64748b;margin-top:2px;">${t.students} students</div></div></div>
+        ${profileSelectedDay&&profileSelectedTime?`<div style="background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:10px;padding:11px;margin-bottom:14px;font-size:13px;color:#1d4ed8;">📅 ${profileSelectedDay} at ${profileSelectedTime}<button onclick="profileSelectedDay=null;profileSelectedTime=null;renderProfile();" style="float:right;background:none;border:none;color:#94a3b8;cursor:pointer;font-size:12px;">✕</button></div>`:`<div style="background:#fef9c3;border:1.5px solid #fef08a;border-radius:10px;padding:11px;margin-bottom:14px;font-size:12.5px;color:#92400e;">📅 Select a day & time on the left to book</div>`}
         <div style="font-weight:700;font-size:13px;color:#1e293b;margin-bottom:8px;">Payment Method</div>
-        ${[{k:"card",i:"💳",l:"Credit / Debit Card"},{k:"paypal",i:"🅿️",l:"PayPal"},{k:"mobile",i:"📱",l:"Mobile Money"}].map(pm=>`
-          <button class="pay-btn${profilePayment===pm.k?' active':''}" onclick="profilePayment='${pm.k}';renderProfile();">
-            <span style="font-size:15px;">${pm.i}</span><span style="flex:1;font-size:12.5px;font-weight:500;color:#1e293b;text-align:left;">${pm.l}</span>
-          </button>`).join('')}
-
-        <button onclick="confirmProfileBooking();" style="width:100%;padding:13px;margin-top:8px;background:${profileBooked?'#22c55e':'linear-gradient(135deg,#1a4a7a,#2563eb)'};color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(37,99,235,0.25);margin-bottom:8px;font-family:'DM Sans',sans-serif;">
-          ${profileBooked?'✓ Lesson Booked!':'Confirm &amp; Pay $'+t.price}
-        </button>
-        <button onclick="openFreeTrialModal(profileTutor.id)" style="width:100%;padding:11px;background:none;border:1.5px solid #22c55e;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;color:#16a34a;font-family:'DM Sans',sans-serif;">🎁 Free Trial Lesson</button>
-
-        <div style="margin-top:14px;padding-top:14px;border-top:1px solid #f1f5f9;">
-          <div style="font-size:12px;color:#64748b;text-align:center;line-height:1.6;">💬 Message ${t.name} before booking<br/><button style="background:none;border:none;color:#2563eb;font-size:12px;cursor:pointer;font-weight:600;">Send a message →</button></div>
-        </div>
+        ${[{k:"card",i:"💳",l:"Credit / Debit Card"},{k:"paypal",i:"🅿️",l:"PayPal"},{k:"mobile",i:"📱",l:"Mobile Money"}].map(pm=>`<button class="pay-btn${profilePayment===pm.k?' active':''}" onclick="profilePayment='${pm.k}';renderProfile();"><span style="font-size:15px;">${pm.i}</span><span style="flex:1;font-size:12.5px;font-weight:500;color:#1e293b;text-align:left;">${pm.l}</span></button>`).join('')}
+        <button onclick="confirmProfileBooking();" style="width:100%;padding:13px;margin-top:8px;background:${profileBooked?'#22c55e':'linear-gradient(135deg,#1a4a7a,#2563eb)'};color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(37,99,235,0.25);margin-bottom:8px;font-family:'DM Sans',sans-serif;">${profileBooked?'✓ Lesson Booked!':'Confirm & Pay $'+t.price}</button>
+        <button style="width:100%;padding:11px;background:none;border:1.5px solid #22c55e;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;color:#16a34a;font-family:'DM Sans',sans-serif;">🎁 Free Trial Lesson</button>
+        <div style="margin-top:14px;padding-top:14px;border-top:1px solid #f1f5f9;"><div style="font-size:12px;color:#64748b;text-align:center;line-height:1.6;">💬 Message ${t.name} before booking<br/><button style="background:none;border:none;color:#2563eb;font-size:12px;cursor:pointer;font-weight:600;">Send a message →</button></div></div>
       </div>
-
-      <!-- Quick stats -->
-      <div style="background:#fff;border-radius:12px;padding:16px;border:1.5px solid #e2e8f0;">
-        <div style="font-weight:700;font-size:13px;color:#1e293b;margin-bottom:12px;">Quick Stats</div>
-        ${[["🏆","Response time","Under 1 hour"],["📅","Lessons taught",t.lessons.toLocaleString()],["👥","Active students",t.students],["🌟","Repeat students","87%"]].map(([ic,l,v])=>`
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;">
-            <span style="font-size:13px;color:#64748b;">${ic} ${l}</span>
-            <span style="font-size:13px;font-weight:600;color:#1e293b;">${v}</span>
-          </div>`).join('')}
-      </div>
+      <div style="background:#fff;border-radius:12px;padding:16px;border:1.5px solid #e2e8f0;"><div style="font-weight:700;font-size:13px;color:#1e293b;margin-bottom:12px;">Quick Stats</div>${[["🏆","Response time","Under 1 hour"],["📅","Lessons taught",t.lessons.toLocaleString()],["👥","Active students",t.students],["🌟","Repeat students","87%"]].map(([ic,l,v])=>`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;"><span style="font-size:13px;color:#64748b;">${ic} ${l}</span><span style="font-size:13px;font-weight:600;color:#1e293b;">${v}</span></div>`).join('')}</div>
     </div>
   </div>`;
 }
-
 function selectDay(day){profileSelectedDay=day;profileSelectedTime=null;renderProfile();}
 function selectTime(time){profileSelectedTime=time;renderProfile();}
-function confirmProfileBooking(){
-  if(!profileSelectedTime){alert('Please select a day and time first!');return;}
-  profileBooked=true;renderProfile();
-}
+function confirmProfileBooking(){if(!profileSelectedTime){alert('Please select a day and time first!');return;}profileBooked=true;renderProfile();}
 
-// ── MESSAGING ─────────────────────────────────────────────
+// ---------- messaging ----------
 const MSG_THREADS = [
-  {id:1,tutor:TUTORS[0],unread:2,msgs:[
-    {from:'them',text:'Assalamu Alaikum! Welcome to your first lesson preparation.',time:'Mon 9:00 AM'},
-    {from:'them',text:'Please have your Quran ready and find a quiet space.',time:'Mon 9:01 AM'},
-    {from:'me',text:'Wa Alaikum Assalam! I\'m ready. Thank you Teacher Khadra.',time:'Mon 9:05 AM'},
-    {from:'them',text:'Excellent! See you at 4:30 PM today insha\'Allah. 🌙',time:'Mon 9:06 AM'},
-  ]},
-  {id:2,tutor:TUTORS[4],unread:0,msgs:[
-    {from:'me',text:'Can we focus on Somali grammar next lesson?',time:'Tue 2:10 PM'},
-    {from:'them',text:'Absolutely! I\'ll prepare exercises on verb conjugation.',time:'Tue 2:15 PM'},
-    {from:'me',text:'Perfect, thank you!',time:'Tue 2:17 PM'},
-  ]},
-  {id:3,tutor:TUTORS[12],unread:1,msgs:[
-    {from:'them',text:'Your IELTS exam is in 3 weeks. Let\'s intensify practice.',time:'Wed 11:00 AM'},
-    {from:'me',text:'Yes please! I need help with Writing Task 2.',time:'Wed 11:05 AM'},
-    {from:'them',text:'I\'ve sent you 5 sample essays. Review them before tomorrow.',time:'Wed 3:30 PM'},
-  ]},
-  {id:4,tutor:TUTORS[8],unread:0,msgs:[
-    {from:'me',text:'Could you recommend any Arabic vocabulary apps?',time:'Thu 10:00 AM'},
-    {from:'them',text:'Try Anki with the Quran Vocabulary deck — very effective!',time:'Thu 10:20 AM'},
-  ]},
-  {id:5,tutor:TUTORS[16],unread:1,msgs:[
-    {from:'them',text:'Great progress on algebra this week! 🎉',time:'Fri 5:00 PM'},
-    {from:'them',text:'Try these 5 problems before our next session.',time:'Fri 5:02 PM'},
-  ]},
+  {id:1,tutor:TUTORS[0],unread:2,msgs:[{from:'them',text:'Assalamu Alaikum! Welcome to your first lesson preparation.',time:'Mon 9:00 AM'},{from:'them',text:'Please have your Quran ready and find a quiet space.',time:'Mon 9:01 AM'},{from:'me',text:'Wa Alaikum Assalam! I\'m ready. Thank you Teacher Khadra.',time:'Mon 9:05 AM'},{from:'them',text:'Excellent! See you at 4:30 PM today insha\'Allah. 🌙',time:'Mon 9:06 AM'}]},
+  {id:2,tutor:TUTORS[4],unread:0,msgs:[{from:'me',text:'Can we focus on Somali grammar next lesson?',time:'Tue 2:10 PM'},{from:'them',text:'Absolutely! I\'ll prepare exercises on verb conjugation.',time:'Tue 2:15 PM'},{from:'me',text:'Perfect, thank you!',time:'Tue 2:17 PM'}]},
+  {id:3,tutor:TUTORS[12],unread:1,msgs:[{from:'them',text:'Your IELTS exam is in 3 weeks. Let\'s intensify practice.',time:'Wed 11:00 AM'},{from:'me',text:'Yes please! I need help with Writing Task 2.',time:'Wed 11:05 AM'},{from:'them',text:'I\'ve sent you 5 sample essays. Review them before tomorrow.',time:'Wed 3:30 PM'}]},
+  {id:4,tutor:TUTORS[8],unread:0,msgs:[{from:'me',text:'Could you recommend any Arabic vocabulary apps?',time:'Thu 10:00 AM'},{from:'them',text:'Try Anki with the Quran Vocabulary deck — very effective!',time:'Thu 10:20 AM'}]},
+  {id:5,tutor:TUTORS[16],unread:1,msgs:[{from:'them',text:'Great progress on algebra this week! 🎉',time:'Fri 5:00 PM'},{from:'them',text:'Try these 5 problems before our next session.',time:'Fri 5:02 PM'}]},
 ];
-
 let activeMsgThread = MSG_THREADS[0];
-
 function openMessages(){
   const first=currentUser?currentUser.name.charAt(0).toUpperCase()+currentUser.name.slice(1):'';
   document.getElementById('msg-topbar-avatar').textContent=first[0]||'';
   document.getElementById('msg-topbar-name').textContent=first;
-  renderMsgContacts();
-  renderMsgChat();
-  showPage('messages');
+  renderMsgContacts(); renderMsgChat(); showPage('messages');
 }
-
 function renderMsgContacts(){
   const totalUnread = MSG_THREADS.reduce((s,t)=>s+t.unread,0);
-  const badge = document.getElementById('msg-unread-badge');
-  badge.textContent = totalUnread>0?totalUnread:'';
-  document.getElementById('msg-contacts-list').innerHTML = MSG_THREADS.map(th=>`
-    <div class="msg-contact${th.id===activeMsgThread.id?' active':''}" onclick="selectThread(${th.id})">
-      <div class="avatar" style="width:38px;height:38px;font-size:14px;background:${th.tutor.color};">${th.tutor.name[8]||th.tutor.name[0]}</div>
-      <div class="msg-contact-info">
-        <div class="msg-contact-name">${th.tutor.name}</div>
-        <div class="msg-contact-preview">${th.msgs[th.msgs.length-1].text}</div>
-      </div>
-      ${th.unread>0?`<div class="msg-unread">${th.unread}</div>`:''}
-    </div>`).join('');
+  const badge = document.getElementById('msg-unread-badge'); badge.textContent = totalUnread>0?totalUnread:'';
+  document.getElementById('msg-contacts-list').innerHTML = MSG_THREADS.map(th=>`<div class="msg-contact${th.id===activeMsgThread.id?' active':''}" onclick="selectThread(${th.id})"><div class="avatar" style="width:38px;height:38px;font-size:14px;background:${th.tutor.color};">${th.tutor.name[8]||th.tutor.name[0]}</div><div class="msg-contact-info"><div class="msg-contact-name">${th.tutor.name}</div><div class="msg-contact-preview">${th.msgs[th.msgs.length-1].text}</div></div>${th.unread>0?`<div class="msg-unread">${th.unread}</div>`:''}</div>`).join('');
 }
-
-function selectThread(id){
-  activeMsgThread=MSG_THREADS.find(t=>t.id===id);
-  activeMsgThread.unread=0;
-  renderMsgContacts();
-  renderMsgChat();
-}
-
+function selectThread(id){activeMsgThread=MSG_THREADS.find(t=>t.id===id);activeMsgThread.unread=0;renderMsgContacts();renderMsgChat();}
 function renderMsgChat(){
   const t=activeMsgThread.tutor;
-  document.getElementById('msg-chat-header').innerHTML=`
-    <div class="avatar" style="width:36px;height:36px;font-size:14px;background:${t.color};">${t.name[8]||t.name[0]}</div>
-    <div>
-      <div style="font-weight:700;font-size:14px;color:#1e293b;">${t.name}</div>
-      <div style="font-size:11.5px;color:#22c55e;font-weight:600;">🟢 Online</div>
-    </div>
-    <div style="flex:1;"></div>
-    <button onclick="openProfile(${t.id})" style="padding:7px 14px;background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:9px;font-size:12.5px;font-weight:600;color:#1d4ed8;cursor:pointer;">View Profile</button>`;
+  document.getElementById('msg-chat-header').innerHTML=`<div class="avatar" style="width:36px;height:36px;font-size:14px;background:${t.color};">${t.name[8]||t.name[0]}</div><div><div style="font-weight:700;font-size:14px;color:#1e293b;">${t.name}</div><div style="font-size:11.5px;color:#22c55e;font-weight:600;">🟢 Online</div></div><div style="flex:1;"></div><button onclick="openProfile(${t.id})" style="padding:7px 14px;background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:9px;font-size:12.5px;font-weight:600;color:#1d4ed8;cursor:pointer;">View Profile</button>`;
   const body=document.getElementById('msg-body');
-  body.innerHTML=activeMsgThread.msgs.map(m=>`
-    <div>
-      <div class="msg-bubble ${m.from}">${m.text}</div>
-      <div class="msg-time ${m.from}">${m.time}</div>
-    </div>`).join('');
+  body.innerHTML=activeMsgThread.msgs.map(m=>`<div><div class="msg-bubble ${m.from}">${m.text}</div><div class="msg-time ${m.from}">${m.time}</div></div>`).join('');
   body.scrollTop=body.scrollHeight;
 }
-
 function sendMsg(){
   const inp=document.getElementById('msg-input');
-  const text=inp.value.trim();
-  if(!text)return;
-  activeMsgThread.msgs.push({from:'me',text,time:'Just now'});
-  inp.value='';
-  renderMsgChat();
-  setTimeout(()=>{
-    const replies=["I'll check and get back to you!","Great question! Let's cover that in our next lesson.","Absolutely, I'll prepare materials for you.","Mashallah! Keep up the great work! 🌟","See you at our next session insha'Allah."];
-    activeMsgThread.msgs.push({from:'them',text:replies[Math.floor(Math.random()*replies.length)],time:'Just now'});
-    renderMsgChat();
-  },1200);
+  const text=inp.value.trim(); if(!text)return;
+  activeMsgThread.msgs.push({from:'me',text,time:'Just now'}); inp.value=''; renderMsgChat();
+  setTimeout(()=>{const replies=["I'll check and get back to you!","Great question! Let's cover that in our next lesson.","Absolutely, I'll prepare materials for you.","Mashallah! Keep up the great work! 🌟","See you at our next session insha'Allah."]; activeMsgThread.msgs.push({from:'them',text:replies[Math.floor(Math.random()*replies.length)],time:'Just now'}); renderMsgChat();},1200);
 }
 
-// ── MY LESSONS ─────────────────────────────────────────────
+// ---------- my lessons ----------
 const ALL_LESSONS = [
   {id:1,tutor:TUTORS[0],subject:'Quran',date:'18',month:'Mar',day:'Tue',time:'4:30 PM',duration:60,price:15,status:'upcoming',topic:'Surah Al-Baqarah — Tajweed Practice'},
   {id:2,tutor:TUTORS[4],subject:'Somali Language',date:'19',month:'Mar',day:'Wed',time:'6:00 PM',duration:60,price:14,status:'upcoming',topic:'Advanced Grammar — Verb Conjugation'},
@@ -1043,25 +725,13 @@ const ALL_LESSONS = [
   {id:9,tutor:TUTORS[16],subject:'Mathematics',date:'28',month:'Feb',day:'Fri',time:'11:00 AM',duration:60,price:17,status:'cancelled',topic:'Statistics Introduction'},
   {id:10,tutor:TUTORS[4],subject:'Somali Language',date:'20',month:'Feb',day:'Thu',time:'5:00 PM',duration:60,price:14,status:'cancelled',topic:'Somali Poetry — Gabay'},
 ];
-
 let activeLessonsTab='upcoming';
-
 function openLessons(){
   const first=currentUser?currentUser.name.charAt(0).toUpperCase()+currentUser.name.slice(1):'';
-  document.getElementById('lessons-topbar-avatar').textContent=first[0]||'';
-  document.getElementById('lessons-topbar-name').textContent=first;
-  renderLessons();
-  showPage('lessons');
+  document.getElementById('lessons-topbar-avatar').textContent=first[0]||''; document.getElementById('lessons-topbar-avatar').style.background='#7c3aed';
+  document.getElementById('lessons-topbar-name').textContent=first; renderLessons(); showPage('lessons');
 }
-
-function setLessonsTab(tab){
-  activeLessonsTab=tab;
-  ['upcoming','completed','cancelled'].forEach(t=>{
-    document.getElementById('lessons-tab-'+t).classList.toggle('active',t===tab);
-  });
-  renderLessons();
-}
-
+function setLessonsTab(tab){activeLessonsTab=tab;['upcoming','completed','cancelled'].forEach(t=>{document.getElementById('lessons-tab-'+t).classList.toggle('active',t===tab);}); renderLessons();}
 function renderLessons(){
   const list=ALL_LESSONS.filter(l=>l.status===activeLessonsTab);
   const statusLabel={upcoming:'Upcoming',completed:'Completed',cancelled:'Cancelled'};
@@ -1070,35 +740,10 @@ function renderLessons(){
     document.getElementById('lessons-list').innerHTML=`<div style="text-align:center;padding:48px;background:#fff;border-radius:14px;border:1.5px solid #e2e8f0;"><div style="font-size:40px;margin-bottom:10px;">${activeLessonsTab==='upcoming'?'📅':activeLessonsTab==='completed'?'✅':'❌'}</div><div style="font-weight:600;font-size:14px;color:#475569;">No ${activeLessonsTab} lessons</div><div style="font-size:13px;color:#94a3b8;margin-top:4px;">${activeLessonsTab==='upcoming'?'Book a lesson to get started!':'Your lesson history will appear here.'}</div>${activeLessonsTab==='upcoming'?'<button onclick="showPage(\'dashboard\')" style="margin-top:16px;padding:10px 22px;background:linear-gradient(135deg,#1a4a7a,#2563eb);color:#fff;border:none;border-radius:10px;font-size:13.5px;font-weight:700;cursor:pointer;">Find a Tutor →</button>':''}</div>`;
     return;
   }
-  document.getElementById('lessons-list').innerHTML=list.map(l=>`
-    <div class="lesson-card">
-      <div class="lesson-date-box">
-        <div class="lesson-date-day">${l.date}</div>
-        <div class="lesson-date-mon">${l.month}</div>
-      </div>
-      <div class="avatar" style="width:44px;height:44px;font-size:16px;background:${l.tutor.color};">${l.tutor.name[8]||l.tutor.name[0]}</div>
-      <div class="lesson-info">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px;">
-          <span style="font-weight:700;font-size:14px;color:#1e293b;">${l.tutor.name}</span>
-          <span class="lesson-status ${statusClass[l.status]}">${statusLabel[l.status]}</span>
-        </div>
-        <div style="font-size:13px;color:#475569;margin-bottom:3px;">${l.topic}</div>
-        <div style="font-size:12px;color:#94a3b8;">${l.day} · ${l.time} · ${l.duration} min · $${l.price}</div>
-        ${l.status==='completed'&&l.rating?`<div style="margin-top:4px;color:#f5a623;font-size:13px;">${'★'.repeat(l.rating)}<span style="color:#ddd;">${'★'.repeat(5-l.rating)}</span></div>`:''}
-      </div>
-      <div style="display:flex;flex-direction:column;gap:7px;flex-shrink:0;">
-        ${l.status==='upcoming'?`
-          <button onclick="openProfile(${l.tutor.id})" style="padding:7px 14px;background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:9px;font-size:12px;font-weight:600;color:#1d4ed8;cursor:pointer;">View Profile</button>
-          <button onclick="openMessages()" style="padding:7px 14px;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:9px;font-size:12px;font-weight:600;color:#16a34a;cursor:pointer;">Message</button>`:''}
-        ${l.status==='completed'?`
-          <button onclick="openProfile(${l.tutor.id})" style="padding:7px 14px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:9px;font-size:12px;font-weight:600;color:#64748b;cursor:pointer;">Book Again</button>
-          <button onclick="openReviewModal(${l.tutor.id})" style="padding:7px 14px;background:#fffbeb;border:1.5px solid #fde68a;border-radius:9px;font-size:12px;font-weight:600;color:#d97706;cursor:pointer;">⭐ Review</button>
-          `:''}
-      </div>
-    </div>`).join('');
+  document.getElementById('lessons-list').innerHTML=list.map(l=>`<div class="lesson-card"><div class="lesson-date-box"><div class="lesson-date-day">${l.date}</div><div class="lesson-date-mon">${l.month}</div></div><div class="avatar" style="width:44px;height:44px;font-size:16px;background:${l.tutor.color};">${l.tutor.name[8]||l.tutor.name[0]}</div><div class="lesson-info"><div style="display:flex;align-items:center;gap:8px;margin-bottom:3px;"><span style="font-weight:700;font-size:14px;color:#1e293b;">${l.tutor.name}</span><span class="lesson-status ${statusClass[l.status]}">${statusLabel[l.status]}</span></div><div style="font-size:13px;color:#475569;margin-bottom:3px;">${l.topic}</div><div style="font-size:12px;color:#94a3b8;">${l.day} · ${l.time} · ${l.duration} min · $${l.price}</div>${l.status==='completed'&&l.rating?`<div style="margin-top:4px;color:#f5a623;font-size:13px;">${'★'.repeat(l.rating)}<span style="color:#ddd;">${'★'.repeat(5-l.rating)}</span></div>`:''}</div><div style="display:flex;flex-direction:column;gap:7px;flex-shrink:0;">${l.status==='upcoming'?`<button onclick="openProfile(${l.tutor.id})" style="padding:7px 14px;background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:9px;font-size:12px;font-weight:600;color:#1d4ed8;cursor:pointer;">View Profile</button><button onclick="openMessages()" style="padding:7px 14px;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:9px;font-size:12px;font-weight:600;color:#16a34a;cursor:pointer;">Message</button>`:''}${l.status==='completed'?`<button onclick="openProfile(${l.tutor.id})" style="padding:7px 14px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:9px;font-size:12px;font-weight:600;color:#64748b;cursor:pointer;">Book Again</button>`:''}</div></div>`).join('');
 }
 
-// ── PAYMENTS ─────────────────────────────────────────────
+// ---------- payments ----------
 const TRANSACTIONS = [
   {id:1,tutor:TUTORS[12],subject:'English',date:'Mar 7, 2026',amount:24,type:'paid',method:'💳',label:'IELTS Listening Practice'},
   {id:2,tutor:TUTORS[0],subject:'Quran',date:'Mar 11, 2026',amount:15,type:'paid',method:'💳',label:'Surah Al-Fatiha'},
@@ -1110,170 +755,21 @@ const TRANSACTIONS = [
   {id:8,tutor:TUTORS[12],subject:'English',date:'Feb 14, 2026',amount:24,type:'paid',method:'💳',label:'IELTS Writing Task 1'},
   {id:9,tutor:TUTORS[16],subject:'Mathematics',date:'Feb 10, 2026',amount:17,type:'paid',method:'💳',label:'Algebra Basics'},
 ];
-
 function openPayments(){
   const first=currentUser?currentUser.name.charAt(0).toUpperCase()+currentUser.name.slice(1):'';
-  document.getElementById('pay-topbar-avatar').textContent=first[0]||'';
-  document.getElementById('pay-topbar-name').textContent=first;
-  renderPayments('All time');
-  showPage('payments');
+  document.getElementById('pay-topbar-avatar').textContent=first[0]||''; document.getElementById('pay-topbar-avatar').style.background='#7c3aed';
+  document.getElementById('pay-topbar-name').textContent=first; renderPayments('All time'); showPage('payments');
 }
-
 function renderPayments(filter){
   const S_ICON_MAP={Quran:'🕌','Somali Language':'🇸🇴',Arabic:'🌙',English:'📖',Mathematics:'📐'};
   let list=TRANSACTIONS;
   if(filter==='This month') list=list.filter(t=>t.date.startsWith('Mar'));
   if(filter==='Last month') list=list.filter(t=>t.date.startsWith('Feb'));
-  document.getElementById('txn-list').innerHTML=list.map(t=>`
-    <div class="txn-row">
-      <div class="txn-icon" style="background:${S_COLOR[t.subject]}15;">${S_ICON_MAP[t.subject]||'📚'}</div>
-      <div class="txn-info">
-        <div class="txn-name">${t.label}</div>
-        <div class="txn-sub">${t.tutor.name} · ${t.date} · ${t.method}</div>
-      </div>
-      <div class="txn-amt ${t.type}">${t.type==='refund'?'+':'−'}$${t.amount}</div>
-    </div>`).join('');
+  document.getElementById('txn-list').innerHTML=list.map(t=>`<div class="txn-row"><div class="txn-icon" style="background:${S_COLOR[t.subject]}15;">${S_ICON_MAP[t.subject]||'📚'}</div><div class="txn-info"><div class="txn-name">${t.label}</div><div class="txn-sub">${t.tutor.name} · ${t.date} · ${t.method}</div></div><div class="txn-amt ${t.type}">${t.type==='refund'?'+':'−'}$${t.amount}</div></div>`).join('');
 }
 
-// ── NOTIFICATIONS ─────────────────────────────────────────
-const NOTIFICATIONS = [
-  {id:1,unread:true,icon:'📅',bg:'#eff6ff',title:'Lesson in 1 hour!',body:"Your Quran lesson with Teacher Khadra starts at 4:30 PM today.",time:'Today, 3:30 PM',action:'openLessons'},
-  {id:2,unread:true,icon:'💬',bg:'#f0fdf4',title:'New message from Teacher Amina',body:"I've sent you 5 IELTS Writing Task 2 samples. Review before tomorrow.",time:'Today, 2:15 PM',action:'openMessages'},
-  {id:3,unread:true,icon:'⭐',bg:'#fffbeb',title:'Leave a review for Teacher Faadumo',body:'You completed a Somali Language lesson. How was it?',time:'Yesterday, 7:00 PM',action:null,reviewTutor:5},
-  {id:4,unread:false,icon:'💳',bg:'#fdf4ff',title:'Payment confirmed — $24',body:'Payment for IELTS Listening Practice with Teacher Amina was successful.',time:'Mar 7, 9:05 AM',action:'openPayments'},
-  {id:5,unread:false,icon:'🎁',bg:'#ecfdf5',title:'Free trial available!',body:'Teacher Sagal (Mathematics) is offering a free 30-min trial. Book it before it expires!',time:'Mar 6, 11:00 AM',action:null},
-  {id:6,unread:false,icon:'🔔',bg:'#eff6ff',title:'Lesson reminder',body:'Your Arabic lesson with Teacher Omar is tomorrow at 2:00 PM.',time:'Mar 5, 2:00 PM',action:null},
-  {id:7,unread:false,icon:'✅',bg:'#ecfdf5',title:'Lesson completed',body:'You completed your Mathematics session with Teacher Ahmed. Great work!',time:'Mar 3, 6:00 PM',action:'openLessons'},
-  {id:8,unread:false,icon:'🌟',bg:'#fffbeb',title:'New Top Rated tutor',body:'Teacher Nimo (Arabic) just earned Top Rated status with 158 reviews!',time:'Mar 2, 10:00 AM',action:null},
-];
-
-function openNotifications(){
-  const first=currentUser?currentUser.name.charAt(0).toUpperCase()+currentUser.name.slice(1):'';
-  const av=document.getElementById('notif-topbar-avatar');
-  if(av){av.textContent=first[0]||'';av.style.background='#7c3aed';}
-  const nm=document.getElementById('notif-topbar-name');
-  if(nm) nm.textContent=first;
-  renderNotifications();
-  showPage('notif');
-}
-function renderNotifications(){
-  const el=document.getElementById('notif-list');
-  if(!el) return;
-  el.innerHTML=NOTIFICATIONS.map(n=>`
-    <div class="notif-item${n.unread?' unread':''}" onclick="handleNotifClick(${n.id})">
-      <div class="notif-icon-wrap" style="background:${n.bg};">${n.icon}</div>
-      <div style="flex:1;">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;">
-          <div style="font-size:13.5px;font-weight:${n.unread?700:600};color:#1e293b;">${n.title}</div>
-          <div style="font-size:11px;color:#94a3b8;white-space:nowrap;flex-shrink:0;">${n.time}</div>
-        </div>
-        <div style="font-size:12.5px;color:#64748b;margin-top:3px;line-height:1.55;">${n.body}</div>
-        ${n.reviewTutor?`<button onclick="event.stopPropagation();openReviewModal(${n.reviewTutor})" style="margin-top:8px;padding:6px 14px;background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:8px;font-size:12px;font-weight:600;color:#1d4ed8;cursor:pointer;">⭐ Write Review</button>`:''}
-      </div>
-      ${n.unread?'<div class="notif-dot"></div>':''}
-    </div>`).join('');
-}
-function handleNotifClick(id){
-  const n=NOTIFICATIONS.find(x=>x.id===id);
-  if(n) n.unread=false;
-  renderNotifications();
-  if(n&&n.action) window[n.action]();
-}
-function markAllRead(){NOTIFICATIONS.forEach(n=>n.unread=false);renderNotifications();}
-
-// ── SETTINGS ─────────────────────────────────────────────
-function openSettings(){
-  const first=currentUser?currentUser.name.charAt(0).toUpperCase()+currentUser.name.slice(1):'';
-  ['settings-topbar-avatar','settings-avatar-big'].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=first[0]||'';el.style.background='#7c3aed';}});
-  const sn=document.getElementById('settings-topbar-name');if(sn)sn.textContent=first;
-  const dn=document.getElementById('settings-display-name');if(dn)dn.textContent=currentUser?currentUser.name:'';
-  const de=document.getElementById('settings-display-email');if(de)de.textContent=currentUser?currentUser.email:'';
-  const ni=document.getElementById('settings-name-input');if(ni)ni.value=currentUser?currentUser.name:'';
-  const ei=document.getElementById('settings-email-input');if(ei)ei.value=currentUser?currentUser.email:'';
-  showPage('settings');
-}
-function saveSettings(){
-  const name=document.getElementById('settings-name-input').value.trim();
-  const email=document.getElementById('settings-email-input').value.trim();
-  if(name&&currentUser){currentUser.name=name;if(email)currentUser.email=email;}
-  showToast('✓ Settings saved successfully!','#22c55e');
-}
-
-// ── TOAST HELPER ─────────────────────────────────────────
-function showToast(msg,bg){
-  const t=document.createElement('div');
-  t.textContent=msg;
-  t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:'+bg+';color:#fff;padding:12px 24px;border-radius:12px;font-weight:700;font-size:14px;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,0.2);white-space:nowrap;';
-  document.body.appendChild(t);
-  setTimeout(()=>t.remove(),2500);
-}
-
-// ── REVIEW MODAL ──────────────────────────────────────────
-let reviewRating=0;
-function openReviewModal(tutorId){
-  const t=TUTORS.find(x=>x.id===tutorId)||TUTORS[4];
-  reviewRating=0;
-  closeModal('review-modal');
-  const modal=document.createElement('div');
-  modal.className='modal-overlay';modal.id='review-modal';
-  modal.innerHTML=`<div class="modal-box">
-    <button class="modal-close" onclick="closeModal('review-modal')">✕</button>
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
-      <div class="avatar" style="width:50px;height:50px;font-size:20px;background:${t.color};">${t.name[8]||t.name[0]}</div>
-      <div><div style="font-family:'Merriweather',serif;font-size:16px;font-weight:700;color:#1e293b;">Leave a Review</div><div style="font-size:13px;color:#64748b;">for ${t.name}</div></div>
-    </div>
-    <div style="font-size:13px;font-weight:600;color:#374151;margin-bottom:4px;">Your Rating</div>
-    <div class="star-picker">${[1,2,3,4,5].map(i=>`<span class="star-pick" onclick="setReviewRating(${i})" id="rstar-${i}">★</span>`).join('')}</div>
-    <div style="font-size:13px;font-weight:600;color:#374151;margin-bottom:6px;">Your Review</div>
-    <textarea id="review-text" placeholder="Share your experience with ${t.name}..." style="width:100%;padding:11px 13px;border:1.5px solid #e2e8f0;border-radius:11px;font-size:13.5px;background:#f8fafc;font-family:'DM Sans',sans-serif;resize:none;outline:none;line-height:1.6;" rows="4"></textarea>
-
-```
-<button onclick="submitReview(${t.id})" style="width:100%;padding:13px;margin-top:14px;background:linear-gradient(135deg,#1a4a7a,#2563eb);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">Submit Review ⭐</button>
-```
-
-  </div>`;
-  document.getElementById('modal-container').appendChild(modal);
-}
-function setReviewRating(r){
-  reviewRating=r;
-  [1,2,3,4,5].forEach(i=>{const el=document.getElementById('rstar-'+i);if(el)el.classList.toggle('on',i<=r);});
-}
-function submitReview(tutorId){
-  const text=document.getElementById('review-text').value.trim();
-  if(!reviewRating){showToast('Please select a star rating!','#ef4444');return;}
-  if(!text){showToast('Please write a short review!','#ef4444');return;}
-  closeModal('review-modal');
-  showToast('⭐ Review submitted! Thank you!','#f5a623');
-}
-
-// ── FREE TRIAL MODAL ──────────────────────────────────────
-function openFreeTrialModal(tutorId){
-const t=TUTORS.find(x=>x.id===tutorId)||TUTORS[0];
-closeModal(‘trial-modal’);
-const days=[‘Mon Mar 18’,‘Tue Mar 19’,‘Wed Mar 20’,‘Thu Mar 21’,‘Sat Mar 22’,‘Sun Mar 23’];
-const times=[‘9:00 AM’,‘10:00 AM’,‘2:00 PM’,‘4:00 PM’,‘6:00 PM’];
-const modal=document.createElement(‘div’);
-modal.className=‘modal-overlay’;modal.id=‘trial-modal’;
-modal.innerHTML=`<div class="modal-box"> <button class="modal-close" onclick="closeModal('trial-modal')">✕</button> <div style="background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-radius:12px;padding:14px;margin-bottom:18px;text-align:center;"> <div style="font-size:28px;margin-bottom:4px;">🎁</div> <div style="font-family:'Merriweather',serif;font-size:17px;font-weight:700;color:#065f46;">Free Trial Lesson</div> <div style="font-size:13px;color:#059669;margin-top:2px;">30 minutes · No payment needed</div> </div> <div style="display:flex;align-items:center;gap:11px;margin-bottom:18px;"> <div class="avatar" style="width:44px;height:44px;font-size:18px;background:${t.color};">${t.name[8]||t.name[0]}</div> <div><div style="font-weight:700;font-size:14px;color:#1e293b;">${t.name}</div><div style="font-size:12.5px;color:#64748b;">${t.subject} · ${t.language} · ⭐ ${t.rating}</div></div> </div> <div style="font-size:13px;font-weight:600;color:#374151;margin-bottom:8px;">Choose a day</div> <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;" id="trial-days"> ${days.map(d=>`<button onclick="selectTrialBtn(this,'trial-days')" style="padding:7px 11px;border:1.5px solid #e2e8f0;border-radius:9px;font-size:12px;font-weight:500;cursor:pointer;background:#fff;color:#374151;">${d}</button>`).join('')} </div> <div style="font-size:13px;font-weight:600;color:#374151;margin-bottom:8px;">Choose a time</div> <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px;" id="trial-times"> ${times.map(tm=>`<button onclick="selectTrialBtn(this,'trial-times')" style="padding:7px 14px;border:1.5px solid #e2e8f0;border-radius:9px;font-size:12px;font-weight:500;cursor:pointer;background:#fff;color:#374151;">${tm}</button>`).join(’’)}
-</div>
-<button onclick="bookFreeTrial('${t.name}')" style="width:100%;padding:13px;background:linear-gradient(135deg,#059669,#22c55e);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;box-shadow:0 4px 14px rgba(34,197,94,0.3);">🎁 Book Free Trial — $0</button>
-
-  </div>`;
-  document.getElementById('modal-container').appendChild(modal);
-}
-function selectTrialBtn(btn,groupId){
-  document.getElementById(groupId).querySelectorAll('button').forEach(b=>{b.style.background='#fff';b.style.borderColor='#e2e8f0';b.style.color='#374151';});
-  btn.style.background='#ecfdf5';btn.style.borderColor='#22c55e';btn.style.color='#059669';
-}
-function bookFreeTrial(name){
-  closeModal('trial-modal');
-  showToast('🎉 Free trial booked with '+name+'!','#059669');
-}
-function closeModal(id){const el=document.getElementById(id);if(el)el.remove();}
-
-// INIT
+// initial render (booking panel)
 renderBooking();
 </script>
-
 </body>
 </html>
