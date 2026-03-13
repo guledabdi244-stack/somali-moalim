@@ -1,227 +1,1009 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>SomaliTutor</title>
-<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'DM Sans',sans-serif;background:#f0f4f8;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
-::-webkit-scrollbar{width:6px;}
+body{font-family:'DM Sans',sans-serif;background:#f0f4f8;color:#1e293b;}
+button,input,select{font-family:'DM Sans',sans-serif;}
+input:focus,select:focus{outline:none;border-color:#2563eb!important;box-shadow:0 0 0 3px rgba(37,99,235,0.12);}
+::-webkit-scrollbar{width:5px;}
 ::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+.page{display:none;min-height:100vh;}
+.page.active{display:flex;}
+
+/* AUTH */
+.auth-layout{width:100%;display:flex;min-height:100vh;}
+.auth-left{flex:1;background:linear-gradient(160deg,#0f2744,#1a4a7a,#2563eb);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px;position:relative;overflow:hidden;}
+.auth-left::before{content:””;position:absolute;bottom:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,0.04);}
+.auth-right{width:460px;background:#fff;display:flex;align-items:center;justify-content:center;padding:48px;}
+.auth-form{width:100%;max-width:360px;animation:fadeUp 0.4s ease;}
+.logo{display:flex;align-items:center;gap:8px;}
+.logo-icon{background:linear-gradient(135deg,#1a4a7a,#2563eb);border-radius:8px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;box-shadow:0 4px 14px rgba(37,99,235,0.3);}
+.logo-icon.lg{width:44px;height:44px;font-size:24px;border-radius:12px;}
+.logo-text{font-family:‘Merriweather’,serif;font-weight:700;font-size:17px;color:#1a4a7a;}
+.logo-text.lg{font-size:26px;}
+.logo-text span{color:#2563eb;}
+.field-label{font-size:13px;font-weight:600;color:#374151;display:block;margin-bottom:5px;}
+.field-input{width:100%;padding:11px 15px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;background:#f8fafc;}
+.error-box{background:#fef2f2;border:1.5px solid #fecaca;border-radius:10px;padding:11px 15px;color:#dc2626;font-size:13px;margin-bottom:14px;}
+.btn-blue{width:100%;padding:13px;background:linear-gradient(135deg,#1a4a7a,#2563eb);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(37,99,235,0.3);transition:opacity 0.15s;}
+.btn-blue:hover{opacity:0.92;}
+.btn-blue:disabled{background:#93c5fd;cursor:not-allowed;}
+.role-btns{display:flex;gap:10px;margin-bottom:18px;}
+.role-btn{flex:1;padding:11px;border:1.5px solid #e2e8f0;border-radius:12px;background:#fff;cursor:pointer;font-size:13.5px;font-weight:600;color:#64748b;}
+.role-btn.active{border:2px solid #2563eb;background:#eff6ff;color:#1d4ed8;}
+.strength-bars{display:flex;gap:3px;margin-bottom:3px;}
+.strength-bar{flex:1;height:3px;border-radius:2px;background:#e2e8f0;}
+.strength-bar.on{background:#22c55e;}
+
+/* DASHBOARD */
+#dashboard-page{flex-direction:column;height:100vh;}
+.topbar{background:#fff;border-bottom:1px solid #e8ecf0;display:flex;align-items:center;padding:0 22px;height:58px;gap:14px;flex-shrink:0;}
+.topbar-search{flex:1;max-width:400px;position:relative;}
+.topbar-search input{width:100%;padding:8px 14px 8px 33px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:13.5px;background:#f8fafc;}
+.topbar-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#94a3b8;font-size:14px;}
+.main-area{display:flex;flex:1;overflow:hidden;}
+.sidebar{width:210px;background:#fff;border-right:1px solid #e8ecf0;display:flex;flex-direction:column;padding:18px 0;flex-shrink:0;}
+.nav-btn{display:flex;align-items:center;gap:11px;width:100%;padding:10px 18px;background:none;border:none;border-left:3px solid transparent;cursor:pointer;color:#64748b;font-size:14px;text-align:left;transition:background 0.12s;}
+.nav-btn:hover{background:#f8fafc;}
+.nav-btn.active{background:#eff6ff;border-left-color:#2563eb;color:#1d4ed8;font-weight:600;}
+.center-col{flex:1;padding:18px;overflow-y:auto;display:flex;flex-direction:column;gap:14px;}
+.right-col{width:285px;padding:18px 18px 18px 0;overflow-y:auto;display:flex;flex-direction:column;gap:14px;flex-shrink:0;}
+.avatar{border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-family:‘Merriweather’,serif;flex-shrink:0;}
+.badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;}
+.badge-top{background:#eff6ff;color:#1d4ed8;}
+.badge-popular{background:#ecfdf5;color:#059669;}
+.badge-new{background:#fffbeb;color:#d97706;}
+.pills{display:flex;gap:7px;flex-wrap:wrap;}
+.pill{padding:6px 13px;border-radius:50px;font-size:12.5px;font-weight:600;cursor:pointer;border:1.5px solid #e2e8f0;background:#fff;color:#64748b;transition:all 0.15s;}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.filter-select{padding:6px 11px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:12.5px;color:#374151;background:#fff;cursor:pointer;}
+.tutor-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.tutor-card{background:#fff;border-radius:13px;padding:14px;cursor:pointer;border:2px solid transparent;box-shadow:0 1px 5px rgba(0,0,0,0.06);transition:all 0.15s;}
+.tutor-card:hover{border-color:#93c5fd;box-shadow:0 4px 18px rgba(37,99,235,0.1);transform:translateY(-2px);}
+.tutor-card.selected{border-color:#2563eb;}
+.panel-card{background:#fff;border-radius:15px;padding:17px;border:1.5px solid #e2e8f0;box-shadow:0 2px 10px rgba(0,0,0,0.05);}
+.live-card{background:#0f172a;border-radius:15px;padding:15px;}
+.live-video{background:linear-gradient(135deg,#1e3a5f,#0f2744);border-radius:11px;height:125px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;position:relative;}
+.live-badge{position:absolute;top:7px;left:7px;background:#ef4444;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;display:flex;align-items:center;gap:3px;}
+.live-dot{width:5px;height:5px;border-radius:50%;background:#fff;animation:pulse 1s infinite;}
+.upcoming-widget{margin:0 13px 14px;background:#f8fafc;border-radius:12px;padding:13px 11px;border:1px solid #e2e8f0;}
+.pay-btn{display:flex;align-items:center;width:100%;padding:8px 10px;border:1.5px solid #e2e8f0;border-radius:10px;background:#fff;cursor:pointer;margin-bottom:6px;gap:8px;transition:all 0.15s;}
+.pay-btn.active{border:2px solid #2563eb;background:#eff6ff;}
+
+/* ── TUTOR PROFILE PAGE ── */
+#profile-page{flex-direction:column;height:100vh;}
+.profile-topbar{background:#fff;border-bottom:1px solid #e8ecf0;display:flex;align-items:center;padding:0 22px;height:58px;gap:12px;flex-shrink:0;}
+.back-btn{display:flex;align-items:center;gap:6px;background:none;border:none;cursor:pointer;color:#64748b;font-size:14px;font-weight:500;padding:6px 10px;border-radius:8px;transition:background 0.12s;}
+.back-btn:hover{background:#f1f5f9;color:#1e293b;}
+.profile-body{flex:1;overflow-y:auto;padding:24px;}
+.profile-inner{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:20px;}
+.profile-hero{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.profile-hero-banner{height:110px;position:relative;}
+.profile-hero-content{padding:0 24px 24px;position:relative;}
+.profile-avatar-wrap{position:relative;display:inline-block;margin-top:-36px;margin-bottom:12px;}
+.profile-av{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:28px;font-family:‘Merriweather’,serif;border:4px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,0.15);}
+.online-dot{position:absolute;bottom:4px;right:4px;width:14px;height:14px;background:#22c55e;border-radius:50%;border:2px solid #fff;}
+.stat-row{display:flex;gap:20px;flex-wrap:wrap;margin-top:14px;}
+.stat-item{text-align:center;}
+.stat-num{font-family:‘Merriweather’,serif;font-size:20px;font-weight:700;color:#1e293b;}
+.stat-lbl{font-size:11px;color:#64748b;margin-top:1px;}
+.section-card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 1px 6px rgba(0,0,0,0.05);}
+.section-title{font-size:15px;font-weight:700;color:#1e293b;margin-bottom:14px;}
+.availability-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
+.day-cell{text-align:center;padding:8px 4px;border-radius:8px;font-size:11.5px;}
+.day-cell.avail{background:#eff6ff;color:#1d4ed8;cursor:pointer;font-weight:600;}
+.day-cell.avail:hover{background:#dbeafe;}
+.day-cell.unavail{background:#f8fafc;color:#cbd5e1;}
+.day-cell.selected{background:#2563eb;color:#fff;}
+.day-name{font-size:10px;margin-bottom:4px;font-weight:600;}
+.review-item{padding:14px 0;border-bottom:1px solid #f1f5f9;}
+.review-item:last-child{border-bottom:none;}
+.subject-tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;margin-right:6px;margin-bottom:6px;}
+.time-slots{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.time-slot{padding:7px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:12.5px;cursor:pointer;font-weight:500;color:#374151;transition:all 0.15s;}
+.time-slot:hover{border-color:#93c5fd;background:#f8fafc;}
+.time-slot.selected{border-color:#2563eb;background:#eff6ff;color:#1d4ed8;font-weight:600;}
+.book-sidebar{position:sticky;top:0;}
+.book-card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 14px rgba(0,0,0,0.08);border:1.5px solid #e2e8f0;}
+.profile-layout{display:grid;grid-template-columns:1fr 280px;gap:20px;align-items:start;}
+
+/* MESSAGING */
+#messages-page{flex-direction:column;height:100vh;}
+.msg-layout{display:flex;flex:1;overflow:hidden;}
+.msg-list{width:260px;background:#fff;border-right:1px solid #e8ecf0;display:flex;flex-direction:column;flex-shrink:0;}
+.msg-list-header{padding:14px 16px;border-bottom:1px solid #f1f5f9;font-weight:700;font-size:14px;color:#1e293b;}
+.msg-contact{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;border-left:3px solid transparent;transition:background 0.12s;}
+.msg-contact:hover{background:#f8fafc;}
+.msg-contact.active{background:#eff6ff;border-left-color:#2563eb;}
+.msg-contact-info{flex:1;min-width:0;}
+.msg-contact-name{font-size:13px;font-weight:600;color:#1e293b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.msg-contact-preview{font-size:11.5px;color:#94a3b8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px;}
+.msg-unread{background:#2563eb;color:#fff;border-radius:50%;width:18px;height:18px;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.msg-window{flex:1;display:flex;flex-direction:column;background:#f8fafc;}
+.msg-topbar{background:#fff;border-bottom:1px solid #e8ecf0;padding:12px 18px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.msg-body{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px;}
+.msg-bubble{max-width:68%;padding:10px 14px;border-radius:14px;font-size:13.5px;line-height:1.55;}
+.msg-bubble.them{background:#fff;border:1.5px solid #e2e8f0;color:#1e293b;align-self:flex-start;border-bottom-left-radius:4px;}
+.msg-bubble.me{background:linear-gradient(135deg,#1a4a7a,#2563eb);color:#fff;align-self:flex-end;border-bottom-right-radius:4px;}
+.msg-time{font-size:10.5px;color:#94a3b8;margin-top:2px;}
+.msg-time.me{text-align:right;}
+.msg-input-row{background:#fff;border-top:1px solid #e8ecf0;padding:12px 16px;display:flex;gap:10px;align-items:center;flex-shrink:0;}
+.msg-input{flex:1;padding:10px 14px;border:1.5px solid #e2e8f0;border-radius:22px;font-size:13.5px;background:#f8fafc;outline:none;font-family:‘DM Sans’,sans-serif;}
+.msg-send-btn{background:linear-gradient(135deg,#1a4a7a,#2563eb);color:#fff;border:none;border-radius:50%;width:38px;height:38px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+
+/* MY LESSONS */
+#lessons-page{flex-direction:column;height:100vh;}
+.lessons-body{flex:1;overflow-y:auto;padding:22px;}
+.lessons-inner{max-width:820px;margin:0 auto;}
+.tab-row{display:flex;gap:0;background:#fff;border-radius:12px;padding:4px;border:1.5px solid #e2e8f0;margin-bottom:18px;width:fit-content;}
+.tab-btn{padding:8px 20px;border:none;background:none;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;color:#64748b;transition:all 0.15s;}
+.tab-btn.active{background:linear-gradient(135deg,#1a4a7a,#2563eb);color:#fff;box-shadow:0 2px 8px rgba(37,99,235,0.25);}
+.lesson-card{background:#fff;border-radius:14px;padding:16px 18px;margin-bottom:11px;border:1.5px solid #e2e8f0;display:flex;align-items:center;gap:14px;box-shadow:0 1px 5px rgba(0,0,0,0.04);}
+.lesson-date-box{background:#eff6ff;border-radius:10px;padding:8px 12px;text-align:center;flex-shrink:0;min-width:52px;}
+.lesson-date-day{font-family:‘Merriweather’,serif;font-size:20px;font-weight:700;color:#1a4a7a;}
+.lesson-date-mon{font-size:10px;font-weight:700;color:#64748b;text-transform:uppercase;}
+.lesson-info{flex:1;}
+.lesson-status{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:700;}
+.status-upcoming{background:#eff6ff;color:#1d4ed8;}
+.status-completed{background:#ecfdf5;color:#059669;}
+.status-cancelled{background:#fef2f2;color:#dc2626;}
+
+/* PAYMENTS */
+#payments-page{flex-direction:column;height:100vh;}
+.payments-body{flex:1;overflow-y:auto;padding:22px;}
+.payments-inner{max-width:820px;margin:0 auto;}
+.stat-cards-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.stat-card{background:#fff;border-radius:14px;padding:16px 18px;border:1.5px solid #e2e8f0;box-shadow:0 1px 5px rgba(0,0,0,0.04);}
+.stat-card-icon{font-size:22px;margin-bottom:6px;}
+.stat-card-val{font-family:‘Merriweather’,serif;font-size:22px;font-weight:700;color:#1e293b;}
+.stat-card-lbl{font-size:12px;color:#64748b;margin-top:2px;}
+.txn-row{display:flex;align-items:center;gap:13px;padding:13px 0;border-bottom:1px solid #f1f5f9;}
+.txn-row:last-child{border-bottom:none;}
+.txn-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.txn-info{flex:1;}
+.txn-name{font-size:13.5px;font-weight:600;color:#1e293b;}
+.txn-sub{font-size:11.5px;color:#94a3b8;margin-top:1px;}
+.txn-amt{font-size:14px;font-weight:700;}
+.txn-amt.paid{color:#dc2626;}
+.txn-amt.refund{color:#22c55e;}
 </style>
+
 </head>
 <body>
-<div id="root"></div>
-<script type="text/babel">
-const { useState } = React;
 
-const tutors = [
-  { id:1, name:"Teacher Khadra", rating:4.9, language:"Somali", price:15, subject:"Quran", color:"#1a4a7a" },
-  { id:2, name:"Teacher Ahmed", rating:4.8, language:"Somali", price:12, subject:"English", color:"#2d6a4f" },
-  { id:3, name:"Teacher Fadumo", rating:4.7, language:"Somali", price:10, subject:"Mathematics", color:"#7c3aed" },
-  { id:4, name:"Teacher Omar", rating:4.6, language:"Arabic", price:18, subject:"Arabic", color:"#b45309" },
-];
+<!-- LOGIN -->
 
-const Avatar = ({ name, color, size=44 }) => (
-  <div style={{width:size,height:size,borderRadius:"50%",background:color,display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontWeight:700,fontSize:size*0.38,flexShrink:0}}>
-    {name[0]}
-  </div>
-);
-
-const Stars = ({ rating }) => (
-  <span>{"★".repeat(Math.floor(rating))}<span style={{color:"#ddd"}}>{"★".repeat(5-Math.floor(rating))}</span></span>
-);
-
-function App() {
-  const [activeNav, setActiveNav] = useState("Find Tutors");
-  const [selectedTutor, setSelectedTutor] = useState(tutors[0]);
-  const [payment, setPayment] = useState("card");
-  const [timeSlot, setTimeSlot] = useState("4:30 PM - 5:00 PM");
-  const [booked, setBooked] = useState(false);
-  const [search, setSearch] = useState("");
-  const [showAll, setShowAll] = useState(false);
-
-  const navItems = [
-    {label:"Dashboard",icon:"🏠"},{label:"Find Tutors",icon:"🔍"},
-    {label:"My Lessons",icon:"📅"},{label:"Messages",icon:"💬"},
-    {label:"Payments",icon:"💳"},{label:"Settings",icon:"⚙️"},
-  ];
-
-  const filtered = tutors.filter(t =>
-    t.name.toLowerCase().includes(search.toLowerCase()) ||
-    t.subject.toLowerCase().includes(search.toLowerCase())
-  );
-  const displayed = showAll ? filtered : filtered.slice(0,2);
-
-  return (
-    <div style={{fontFamily:"'DM Sans',sans-serif",height:"100vh",display:"flex",flexDirection:"column",background:"#f0f4f8"}}>
-      {/* Topbar */}
-      <div style={{background:"#fff",borderBottom:"1px solid #e8ecf0",display:"flex",alignItems:"center",padding:"0 24px",height:60,gap:16,flexShrink:0}}>
-        <div style={{display:"flex",alignItems:"center",gap:8,minWidth:200}}>
-          <div style={{background:"linear-gradient(135deg,#1a4a7a,#2563eb)",borderRadius:8,width:34,height:34,display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:18}}>📚</div>
-          <span style={{fontFamily:"'Merriweather',serif",fontWeight:700,fontSize:17,color:"#1a4a7a"}}>Somali<span style={{color:"#2563eb"}}>Tutor</span></span>
-        </div>
-        <div style={{flex:1,maxWidth:420,position:"relative"}}>
-          <span style={{position:"absolute",left:12,top:"50%",transform:"translateY(-50%)",color:"#94a3b8"}}>🔍</span>
-          <input value={search} onChange={e=>{setSearch(e.target.value);setShowAll(true);}} placeholder="Search Tutors"
-            style={{width:"100%",padding:"9px 16px 9px 36px",border:"1.5px solid #e2e8f0",borderRadius:10,fontSize:14,outline:"none",background:"#f8fafc",boxSizing:"border-box"}}/>
-        </div>
-        <div style={{flex:1}}/>
-        {["🔍","✉️","🔔"].map((ic,i)=><button key={i} style={{background:"none",border:"none",cursor:"pointer",fontSize:18,padding:"6px 8px"}}>{ic}</button>)}
-        <Avatar name="Ayaan" color="#7c3aed" size={36}/>
-      </div>
-
-      <div style={{display:"flex",flex:1,overflow:"hidden"}}>
-        {/* Sidebar */}
-        <aside style={{width:220,background:"#fff",borderRight:"1px solid #e8ecf0",display:"flex",flexDirection:"column",padding:"20px 0",flexShrink:0}}>
-          <nav style={{flex:1}}>
-            {navItems.map(item=>{
-              const active = activeNav===item.label;
-              return <button key={item.label} onClick={()=>setActiveNav(item.label)}
-                style={{display:"flex",alignItems:"center",gap:12,width:"100%",padding:"11px 20px",background:active?"#eff6ff":"none",border:"none",borderLeft:active?"3px solid #2563eb":"3px solid transparent",cursor:"pointer",color:active?"#1d4ed8":"#64748b",fontWeight:active?600:400,fontSize:14.5,textAlign:"left",fontFamily:"'DM Sans',sans-serif"}}>
-                <span style={{fontSize:16}}>{item.icon}</span>{item.label}
-              </button>;
-            })}
-          </nav>
-          <div style={{padding:"0 16px 12px"}}>
-            <button style={{width:"100%",padding:"10px",background:"none",border:"1.5px solid #e2e8f0",borderRadius:10,cursor:"pointer",color:"#64748b",fontSize:14,fontFamily:"'DM Sans',sans-serif"}}>🚪 Log Out</button>
-          </div>
-          <div style={{margin:"0 14px 16px",background:"#f8fafc",borderRadius:12,padding:"14px 12px",border:"1px solid #e2e8f0"}}>
-            <div style={{fontWeight:700,fontSize:13,color:"#1e293b",marginBottom:10}}>Upcoming Lesson</div>
-            {tutors.slice(0,2).map(t=>(
-              <div key={t.id} style={{display:"flex",alignItems:"center",gap:8,marginBottom:8}}>
-                <Avatar name={t.name} color={t.color} size={34}/>
-                <div>
-                  <div style={{fontWeight:600,fontSize:12.5,color:"#1e293b"}}>{t.name}</div>
-                  <div style={{fontSize:11,color:"#64748b"}}>${t.price}/hr · 🎓 {t.subject}</div>
-                </div>
-              </div>
-            ))}
-            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginTop:4}}>
-              <span style={{fontSize:11,color:"#64748b"}}>Today 4:30 PM</span>
-              <button style={{background:"#22c55e",color:"#fff",border:"none",borderRadius:8,padding:"5px 12px",fontSize:12,fontWeight:600,cursor:"pointer"}}>Join Now</button>
-            </div>
-          </div>
-        </aside>
-
-        {/* Main */}
-        <main style={{flex:1,display:"flex",overflow:"hidden"}}>
-          <div style={{flex:1,padding:"24px 20px",overflowY:"auto",display:"flex",flexDirection:"column",gap:22}}>
-            <h1 style={{fontFamily:"'Merriweather',serif",fontSize:22,color:"#1e293b",fontWeight:700}}>Welcome back, Ayaan! 👋</h1>
-            <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
-              {["Availability ▾","Price ▾","Subject ▾","Language ▾"].map((f,i)=>(
-                <div key={i} style={{padding:"8px 16px",background:"#fff",border:"1.5px solid #e2e8f0",borderRadius:10,fontSize:13.5,color:"#64748b",cursor:"pointer"}}>{f}</div>
-              ))}
-            </div>
-            <section>
-              <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:14}}>
-                <h2 style={{fontSize:16,fontWeight:700,color:"#1e293b",margin:0}}>Featured Tutors</h2>
-                <button onClick={()=>setShowAll(!showAll)} style={{background:"none",border:"none",color:"#2563eb",fontSize:13.5,fontWeight:600,cursor:"pointer"}}>{showAll?"Show less":"View all"}</button>
-              </div>
-              <div style={{display:"flex",flexDirection:"column",gap:12}}>
-                {displayed.map(t=>(
-                  <div key={t.id} onClick={()=>{setSelectedTutor(t);setBooked(false);}}
-                    style={{background:"#fff",borderRadius:14,padding:"14px 16px",display:"flex",alignItems:"center",gap:14,cursor:"pointer",border:selectedTutor?.id===t.id?"2px solid #2563eb":"2px solid #e2e8f0"}}>
-                    <Avatar name={t.name} color={t.color} size={48}/>
-                    <div style={{flex:1}}>
-                      <div style={{fontWeight:700,fontSize:15,color:"#1e293b"}}>{t.name}</div>
-                      <div style={{fontSize:12,color:"#f5a623"}}><Stars rating={t.rating}/> <span style={{color:"#64748b"}}>{t.rating} · {t.language}</span></div>
-                      <div style={{fontSize:12,color:"#64748b"}}>${t.price}/hr · 🎓 {t.subject}</div>
-                    </div>
-                    <span style={{fontWeight:700,color:"#f5a623"}}>★ ${t.price}/hr</span>
-                  </div>
-                ))}
-              </div>
-              <div style={{display:"flex",gap:12,marginTop:18}}>
-                <button style={{flex:1,padding:"13px",background:"#1a4a7a",color:"#fff",border:"none",borderRadius:12,fontSize:15,fontWeight:700,cursor:"pointer"}}>Book a Lesson</button>
-                <button style={{flex:1,padding:"13px",background:"#22c55e",color:"#fff",border:"none",borderRadius:12,fontSize:15,fontWeight:700,cursor:"pointer"}}>Free Trial Lesson ›</button>
-              </div>
-            </section>
-            <section>
-              <h2 style={{fontSize:16,fontWeight:700,color:"#1e293b",margin:"0 0 14px"}}>Upcoming Lesson</h2>
-              <div style={{background:"#fff",borderRadius:14,padding:18,border:"1.5px solid #e2e8f0"}}>
-                <div style={{display:"flex",gap:14}}>
-                  <Avatar name="Hassan" color="#7c3aed" size={46}/>
-                  <div>
-                    <div style={{fontWeight:700,fontSize:15,color:"#1e293b"}}>Hassan M.</div>
-                    <div style={{fontSize:13.5,color:"#475569",marginTop:4}}>"Great teacher. My semy loves her classes overall!"</div>
-                    <div style={{marginTop:6,color:"#f5a623"}}><Stars rating={4.5}/></div>
-                  </div>
-                </div>
-                <div style={{marginTop:14,background:"#f8fafc",borderRadius:8,height:8,position:"relative",overflow:"hidden"}}>
-                  <div style={{position:"absolute",left:0,top:0,height:"100%",width:"75%",background:"linear-gradient(90deg,#2563eb,#60a5fa)",borderRadius:8}}/>
-                </div>
-                <div style={{fontSize:11,color:"#94a3b8",marginTop:4}}>Lesson progress: 75%</div>
-              </div>
-            </section>
-          </div>
-
-          {/* Right Panel */}
-          <div style={{width:320,padding:"24px 20px 24px 0",overflowY:"auto",display:"flex",flexDirection:"column",gap:20}}>
-            <div style={{background:"#fff",borderRadius:16,padding:22,border:"1.5px solid #e2e8f0",boxShadow:"0 2px 12px rgba(0,0,0,0.05)"}}>
-              <h2 style={{fontSize:16,fontWeight:700,color:"#1e293b",margin:"0 0 6px"}}>Book Your Lesson</h2>
-              <p style={{fontSize:13,color:"#64748b",margin:"0 0 16px"}}>with <strong>{selectedTutor?.name}</strong></p>
-              <select value={timeSlot} onChange={e=>{setTimeSlot(e.target.value);setBooked(false);}}
-                style={{width:"100%",padding:"10px 14px",border:"1.5px solid #e2e8f0",borderRadius:10,fontSize:14,marginBottom:18,background:"#f8fafc",outline:"none"}}>
-                <option>4:30 PM - 5:00 PM</option>
-                <option>5:00 PM - 5:30 PM</option>
-                <option>6:00 PM - 6:30 PM</option>
-                <option>7:00 PM - 7:30 PM</option>
-              </select>
-              <div style={{fontWeight:700,fontSize:14,color:"#1e293b",marginBottom:10}}>Payment Method</div>
-              {[{key:"card",icon:"💳",label:"Credit / Debit Card"},{key:"paypal",icon:"🅿️",label:"PayPal"},{key:"mobile",icon:"📱",label:"Mobile Money"}].map(pm=>(
-                <button key={pm.key} onClick={()=>setPayment(pm.key)}
-                  style={{display:"flex",alignItems:"center",width:"100%",padding:"11px 14px",border:payment===pm.key?"2px solid #2563eb":"1.5px solid #e2e8f0",borderRadius:10,background:payment===pm.key?"#eff6ff":"#fff",cursor:"pointer",marginBottom:8,gap:12}}>
-                  <span style={{fontSize:18}}>{pm.icon}</span>
-                  <span style={{flex:1,fontSize:14,fontWeight:500,color:"#1e293b",textAlign:"left"}}>{pm.label}</span>
-                  <span style={{color:"#94a3b8"}}>›</span>
-                </button>
-              ))}
-              <button onClick={()=>setBooked(true)}
-                style={{width:"100%",padding:"14px",marginTop:8,background:booked?"#22c55e":"linear-gradient(135deg,#1a4a7a,#2563eb)",color:"#fff",border:"none",borderRadius:12,fontSize:15,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 14px rgba(37,99,235,0.3)"}}>
-                {booked?"✓ Lesson Booked!":`Confirm & Pay $${selectedTutor?.price}`}
-              </button>
-            </div>
-            <div style={{background:"#0f172a",borderRadius:16,padding:18}}>
-              <h2 style={{fontSize:15,fontWeight:700,color:"#f1f5f9",margin:"0 0 14px"}}>Live Lesson</h2>
-              <div style={{background:"linear-gradient(135deg,#1e3a5f,#0f2744)",borderRadius:12,height:160,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"0 20px",position:"relative"}}>
-                <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:8}}>
-                  <Avatar name="Khadra" color="#2563eb" size={60}/>
-                  <span style={{color:"#93c5fd",fontSize:11}}>Teacher Khadra</span>
-                </div>
-                <div style={{background:"rgba(255,255,255,0.95)",borderRadius:12,padding:"14px 20px",display:"flex",gap:16}}>
-                  <span style={{fontSize:28,fontWeight:700}}>بَ</span>
-                  <span style={{fontSize:28,fontWeight:700}}>ثَ</span>
-                </div>
-                <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:8}}>
-                  <Avatar name="Ayaan" color="#7c3aed" size={44}/>
-                  <span style={{color:"#c4b5fd",fontSize:11}}>Ayaan</span>
-                </div>
-                <div style={{position:"absolute",top:10,left:10,background:"#ef4444",color:"#fff",fontSize:10,fontWeight:700,padding:"3px 7px",borderRadius:5,display:"flex",alignItems:"center",gap:4}}>
-                  <div style={{width:6,height:6,borderRadius:"50%",background:"#fff",animation:"pulse 1s infinite"}}/>LIVE
-                </div>
-              </div>
-              <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:10,marginTop:14}}>
-                {["🎙️","📹","💬","🎙️"].map((ic,i)=>(
-                  <button key={i} style={{background:"#1e293b",border:"none",color:"#94a3b8",fontSize:16,borderRadius:8,width:38,height:38,cursor:"pointer"}}>{ic}</button>
-                ))}
-                <button style={{background:"#ef4444",border:"none",color:"#fff",fontSize:13,fontWeight:700,borderRadius:8,padding:"9px 16px",cursor:"pointer"}}>End</button>
-              </div>
-            </div>
-          </div>
-        </main>
+<div id="login-page" class="page active">
+  <div class="auth-layout">
+    <div class="auth-left">
+      <div style="text-align:center;z-index:1;max-width:370px;">
+        <div style="margin-bottom:26px;display:flex;justify-content:center;"><div class="logo"><div class="logo-icon lg">📚</div><span class="logo-text lg">Somali<span>Tutor</span></span></div></div>
+        <h1 style="font-family:'Merriweather',serif;font-size:28px;color:#fff;line-height:1.35;margin-bottom:13px;">Learn Somali,<br/>Quran & More</h1>
+        <p style="color:rgba(255,255,255,0.72);font-size:15px;line-height:1.7;margin-bottom:26px;">Connect with 20 expert tutors across 5 subjects.</p>
+        <div id="login-pills"></div>
       </div>
     </div>
-  );
+    <div class="auth-right">
+      <div class="auth-form">
+        <h2 style="font-family:'Merriweather',serif;font-size:24px;color:#1e293b;margin-bottom:7px;">Welcome back</h2>
+        <p style="color:#64748b;font-size:14px;margin-bottom:24px;">Sign in to continue your learning journey</p>
+        <div id="login-error" class="error-box" style="display:none;"></div>
+        <label class="field-label">Email address</label>
+        <input id="login-email" class="field-input" type="email" placeholder="you@example.com" style="margin-bottom:14px;"/>
+        <label class="field-label">Password</label>
+        <div style="position:relative;margin-bottom:8px;">
+          <input id="login-pass" class="field-input" type="password" placeholder="Enter your password"/>
+          <button onclick="togglePass('login-pass',this)" style="position:absolute;right:13px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:#94a3b8;">👁️</button>
+        </div>
+        <div style="text-align:right;margin-bottom:20px;"><button style="background:none;border:none;color:#2563eb;font-size:13px;cursor:pointer;">Forgot password?</button></div>
+        <button class="btn-blue" onclick="doLogin()" id="login-btn">Sign In →</button>
+        <p style="text-align:center;font-size:14px;color:#64748b;margin-top:18px;">Don't have an account? <button onclick="showPage('signup')" style="background:none;border:none;color:#2563eb;font-weight:700;cursor:pointer;font-size:14px;">Sign up free</button></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SIGNUP -->
+
+<div id="signup-page" class="page">
+  <div class="auth-layout">
+    <div class="auth-left">
+      <div style="text-align:center;z-index:1;max-width:360px;">
+        <div style="margin-bottom:26px;display:flex;justify-content:center;"><div class="logo"><div class="logo-icon lg">📚</div><span class="logo-text lg">Somali<span>Tutor</span></span></div></div>
+        <h1 style="font-family:'Merriweather',serif;font-size:27px;color:#fff;line-height:1.35;margin-bottom:13px;">Join thousands of<br/>Somali learners</h1>
+        <p style="color:rgba(255,255,255,0.72);font-size:15px;line-height:1.7;margin-bottom:26px;">20 expert tutors. 5 subjects. Start free today.</p>
+        <div style="display:flex;gap:12px;justify-content:center;">
+          <div style="background:rgba(255,255,255,0.1);border-radius:12px;padding:13px 16px;text-align:center;border:1px solid rgba(255,255,255,0.15);"><div style="font-family:'Merriweather',serif;font-size:20px;font-weight:700;color:#fff;">20+</div><div style="font-size:11px;color:rgba(255,255,255,0.7);margin-top:2px;">Tutors</div></div>
+          <div style="background:rgba(255,255,255,0.1);border-radius:12px;padding:13px 16px;text-align:center;border:1px solid rgba(255,255,255,0.15);"><div style="font-family:'Merriweather',serif;font-size:20px;font-weight:700;color:#fff;">10K+</div><div style="font-size:11px;color:rgba(255,255,255,0.7);margin-top:2px;">Students</div></div>
+          <div style="background:rgba(255,255,255,0.1);border-radius:12px;padding:13px 16px;text-align:center;border:1px solid rgba(255,255,255,0.15);"><div style="font-family:'Merriweather',serif;font-size:20px;font-weight:700;color:#fff;">4.8★</div><div style="font-size:11px;color:rgba(255,255,255,0.7);margin-top:2px;">Rating</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="auth-right" style="width:480px;">
+      <div class="auth-form" style="max-width:390px;">
+        <h2 style="font-family:'Merriweather',serif;font-size:24px;color:#1e293b;margin-bottom:7px;">Create your account</h2>
+        <p style="color:#64748b;font-size:14px;margin-bottom:18px;">Start with a free trial — no credit card needed</p>
+        <div class="role-btns">
+          <button class="role-btn active" id="role-student" onclick="setRole('student')">🎓 I'm a Student</button>
+          <button class="role-btn" id="role-tutor" onclick="setRole('tutor')">👨‍🏫 I'm a Tutor</button>
+        </div>
+        <div id="signup-error" class="error-box" style="display:none;"></div>
+        <label class="field-label">Full name</label>
+        <input id="signup-name" class="field-input" type="text" placeholder="Ayaan Hassan" style="margin-bottom:13px;"/>
+        <label class="field-label">Email address</label>
+        <input id="signup-email" class="field-input" type="email" placeholder="you@example.com" style="margin-bottom:13px;"/>
+        <label class="field-label">Password</label>
+        <div style="position:relative;margin-bottom:6px;">
+          <input id="signup-pass" class="field-input" type="password" placeholder="At least 6 characters" oninput="updateStrength(this.value)"/>
+          <button onclick="togglePass('signup-pass',this)" style="position:absolute;right:13px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:#94a3b8;">👁️</button>
+        </div>
+        <div id="strength-wrap" style="margin-bottom:16px;display:none;">
+          <div class="strength-bars"><div class="strength-bar" id="s1"></div><div class="strength-bar" id="s2"></div><div class="strength-bar" id="s3"></div><div class="strength-bar" id="s4"></div></div>
+          <span id="strength-label" style="font-size:11px;color:#94a3b8;"></span>
+        </div>
+        <button class="btn-blue" onclick="doSignup()" id="signup-btn" style="margin-bottom:13px;">Create Free Account →</button>
+        <p style="text-align:center;font-size:14px;color:#64748b;">Already have an account? <button onclick="showPage('login')" style="background:none;border:none;color:#2563eb;font-weight:700;cursor:pointer;font-size:14px;">Sign in</button></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+
+<div id="dashboard-page" class="page">
+  <div class="topbar">
+    <div style="min-width:190px;" class="logo"><div class="logo-icon">📚</div><span class="logo-text">Somali<span>Tutor</span></span></div>
+    <div class="topbar-search"><span class="topbar-icon">🔍</span><input id="search-input" type="text" placeholder="Search tutors, subjects..." oninput="filterTutors()"/></div>
+    <div style="flex:1;"></div>
+    <button style="background:none;border:none;cursor:pointer;font-size:17px;padding:5px 7px;">✉️</button>
+    <button style="background:none;border:none;cursor:pointer;font-size:17px;padding:5px 7px;">🔔</button>
+    <div id="topbar-avatar" class="avatar" style="width:33px;height:33px;font-size:13px;"></div>
+    <span id="topbar-name" style="font-size:13px;font-weight:500;color:#374151;"></span>
+  </div>
+  <div class="main-area">
+    <div class="sidebar">
+      <nav>
+        <button class="nav-btn active" onclick="setNav(this);showPage('dashboard')"><span>🏠</span>Dashboard</button>
+        <button class="nav-btn" onclick="setNav(this);showPage('dashboard')"><span>🔍</span>Find Tutors</button>
+        <button class="nav-btn" onclick="setNav(this);openLessons()"><span>📅</span>My Lessons</button>
+        <button class="nav-btn" onclick="setNav(this);openMessages()"><span>💬</span>Messages</button>
+        <button class="nav-btn" onclick="setNav(this);openPayments()"><span>💳</span>Payments</button>
+        <button class="nav-btn" onclick="setNav(this)"><span>⚙️</span>Settings</button>
+      </nav>
+      <div style="flex:1;"></div>
+      <div style="padding:0 14px 10px;"><button onclick="doLogout()" style="width:100%;padding:9px;background:none;border:1.5px solid #e2e8f0;border-radius:10px;cursor:pointer;color:#64748b;font-size:13.5px;">🚪 Log Out</button></div>
+      <div class="upcoming-widget">
+        <div style="font-weight:700;font-size:12.5px;color:#1e293b;margin-bottom:9px;">Upcoming Lesson</div>
+        <div id="upcoming-list"></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px;">
+          <span style="font-size:10.5px;color:#64748b;">Today 4:30 PM</span>
+          <button style="background:#22c55e;color:#fff;border:none;border-radius:7px;padding:4px 9px;font-size:11px;font-weight:600;cursor:pointer;">Join Now</button>
+        </div>
+      </div>
+    </div>
+    <div class="center-col">
+      <div>
+        <h1 id="welcome-msg" style="font-family:'Merriweather',serif;font-size:20px;color:#1e293b;font-weight:700;"></h1>
+        <p style="color:#64748b;font-size:13px;margin-top:3px;">Browse 20 expert tutors across 5 subjects</p>
+      </div>
+      <div class="pills" id="subject-pills"></div>
+      <div class="filter-row">
+        <select class="filter-select" id="lang-filter" onchange="filterTutors()">
+          <option>All Languages</option><option>Somali</option><option>Arabic</option><option>English</option>
+        </select>
+        <select class="filter-select" id="price-filter" onchange="filterTutors()">
+          <option>Any Price</option><option>Under $12</option><option>$12–$16</option><option>$17–$20</option><option>Over $20</option>
+        </select>
+        <select class="filter-select" id="sort-filter" onchange="filterTutors()">
+          <option>Top Rated</option><option>Price: Low to High</option><option>Price: High to Low</option><option>Most Reviews</option>
+        </select>
+        <span id="result-count" style="font-size:12px;color:#94a3b8;margin-left:auto;font-weight:500;"></span>
+      </div>
+      <div class="tutor-grid" id="tutor-grid"></div>
+    </div>
+    <div class="right-col">
+      <div class="panel-card" id="booking-panel"></div>
+      <div class="live-card">
+        <h2 style="font-size:13.5px;font-weight:700;color:#f1f5f9;margin:0 0 11px;">Live Lesson</h2>
+        <div class="live-video">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:5px;"><div class="avatar" style="width:44px;height:44px;font-size:17px;background:#2563eb;">K</div><span style="color:#93c5fd;font-size:10px;">Teacher</span></div>
+          <div style="background:rgba(255,255,255,0.95);border-radius:10px;padding:9px 13px;display:flex;gap:9px;"><span style="font-size:21px;font-weight:700;">بَ</span><span style="font-size:21px;font-weight:700;">ثَ</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:5px;"><div id="live-avatar" class="avatar" style="width:34px;height:34px;font-size:13px;background:#7c3aed;"></div><span id="live-name" style="color:#c4b5fd;font-size:10px;"></span></div>
+          <div class="live-badge"><div class="live-dot"></div>LIVE</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:center;gap:7px;margin-top:10px;">
+          <button style="background:#1e293b;border:none;color:#94a3b8;font-size:13px;border-radius:8px;width:31px;height:31px;cursor:pointer;">🎙️</button>
+          <button style="background:#1e293b;border:none;color:#94a3b8;font-size:13px;border-radius:8px;width:31px;height:31px;cursor:pointer;">📹</button>
+          <button style="background:#1e293b;border:none;color:#94a3b8;font-size:13px;border-radius:8px;width:31px;height:31px;cursor:pointer;">💬</button>
+          <button style="background:#ef4444;border:none;color:#fff;font-size:11.5px;font-weight:700;border-radius:8px;padding:7px 12px;cursor:pointer;">End</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TUTOR PROFILE PAGE -->
+
+<div id="profile-page" class="page">
+  <div class="profile-topbar">
+    <button class="back-btn" onclick="showPage('dashboard')">← Back to tutors</button>
+    <div style="flex:1;"></div>
+    <div class="logo"><div class="logo-icon">📚</div><span class="logo-text">Somali<span>Tutor</span></span></div>
+    <div style="flex:1;"></div>
+    <div id="profile-topbar-avatar" class="avatar" style="width:33px;height:33px;font-size:13px;"></div>
+    <span id="profile-topbar-name" style="font-size:13px;font-weight:500;color:#374151;margin-left:8px;"></span>
+  </div>
+  <div class="profile-body">
+    <div class="profile-inner" id="profile-content"></div>
+  </div>
+</div>
+
+<!-- MESSAGES PAGE -->
+
+<div id="messages-page" class="page">
+  <div class="topbar">
+    <div class="logo"><div class="logo-icon">📚</div><span class="logo-text">Somali<span>Tutor</span></span></div>
+    <div style="flex:1;"></div>
+    <div id="msg-topbar-avatar" class="avatar" style="width:33px;height:33px;font-size:13px;background:#7c3aed;"></div>
+    <span id="msg-topbar-name" style="font-size:13px;font-weight:500;color:#374151;margin-left:8px;"></span>
+    <button onclick="doLogout()" style="margin-left:14px;padding:7px 14px;background:none;border:1.5px solid #e2e8f0;border-radius:9px;cursor:pointer;color:#64748b;font-size:13px;">Log Out</button>
+  </div>
+  <div class="msg-layout">
+    <div class="msg-list">
+      <div class="msg-list-header">💬 Messages <span id="msg-unread-badge" style="background:#ef4444;color:#fff;border-radius:50%;padding:1px 6px;font-size:11px;font-weight:700;margin-left:4px;"></span></div>
+      <div style="overflow-y:auto;flex:1;" id="msg-contacts-list"></div>
+    </div>
+    <div class="msg-window">
+      <div class="msg-topbar" id="msg-chat-header"></div>
+      <div class="msg-body" id="msg-body"></div>
+      <div class="msg-input-row">
+        <input class="msg-input" id="msg-input" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendMsg()"/>
+        <button class="msg-send-btn" onclick="sendMsg()">➤</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MY LESSONS PAGE -->
+
+<div id="lessons-page" class="page">
+  <div class="topbar">
+    <div class="logo"><div class="logo-icon">📚</div><span class="logo-text">Somali<span>Tutor</span></span></div>
+    <div style="flex:1;"></div>
+    <div id="lessons-topbar-avatar" class="avatar" style="width:33px;height:33px;font-size:13px;background:#7c3aed;"></div>
+    <span id="lessons-topbar-name" style="font-size:13px;font-weight:500;color:#374151;margin-left:8px;"></span>
+    <button onclick="showPage('dashboard')" style="margin-left:14px;padding:7px 14px;background:none;border:1.5px solid #e2e8f0;border-radius:9px;cursor:pointer;color:#64748b;font-size:13px;">← Dashboard</button>
+    <button onclick="doLogout()" style="margin-left:8px;padding:7px 14px;background:none;border:1.5px solid #e2e8f0;border-radius:9px;cursor:pointer;color:#64748b;font-size:13px;">Log Out</button>
+  </div>
+  <div class="lessons-body">
+    <div class="lessons-inner">
+      <h2 style="font-family:'Merriweather',serif;font-size:22px;color:#1e293b;margin-bottom:16px;">📅 My Lessons</h2>
+      <div class="tab-row">
+        <button class="tab-btn active" id="lessons-tab-upcoming" onclick="setLessonsTab('upcoming')">Upcoming</button>
+        <button class="tab-btn" id="lessons-tab-completed" onclick="setLessonsTab('completed')">Completed</button>
+        <button class="tab-btn" id="lessons-tab-cancelled" onclick="setLessonsTab('cancelled')">Cancelled</button>
+      </div>
+      <div id="lessons-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAYMENTS PAGE -->
+
+<div id="payments-page" class="page">
+  <div class="topbar">
+    <div class="logo"><div class="logo-icon">📚</div><span class="logo-text">Somali<span>Tutor</span></span></div>
+    <div style="flex:1;"></div>
+    <div id="pay-topbar-avatar" class="avatar" style="width:33px;height:33px;font-size:13px;background:#7c3aed;"></div>
+    <span id="pay-topbar-name" style="font-size:13px;font-weight:500;color:#374151;margin-left:8px;"></span>
+    <button onclick="showPage('dashboard')" style="margin-left:14px;padding:7px 14px;background:none;border:1.5px solid #e2e8f0;border-radius:9px;cursor:pointer;color:#64748b;font-size:13px;">← Dashboard</button>
+    <button onclick="doLogout()" style="margin-left:8px;padding:7px 14px;background:none;border:1.5px solid #e2e8f0;border-radius:9px;cursor:pointer;color:#64748b;font-size:13px;">Log Out</button>
+  </div>
+  <div class="payments-body">
+    <div class="payments-inner">
+      <h2 style="font-family:'Merriweather',serif;font-size:22px;color:#1e293b;margin-bottom:16px;">💳 Payments</h2>
+      <div class="stat-cards-row">
+        <div class="stat-card"><div class="stat-card-icon">💰</div><div class="stat-card-val">$147</div><div class="stat-card-lbl">Total Spent</div></div>
+        <div class="stat-card"><div class="stat-card-icon">📚</div><div class="stat-card-val">9</div><div class="stat-card-lbl">Lessons Paid</div></div>
+        <div class="stat-card"><div class="stat-card-icon">⭐</div><div class="stat-card-val">$16.33</div><div class="stat-card-lbl">Avg per Lesson</div></div>
+      </div>
+      <div style="background:#fff;border-radius:14px;padding:18px 20px;border:1.5px solid #e2e8f0;box-shadow:0 1px 5px rgba(0,0,0,0.04);">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+          <div style="font-weight:700;font-size:15px;color:#1e293b;">Transaction History</div>
+          <select style="padding:6px 11px;border:1.5px solid #e2e8f0;border-radius:9px;font-size:12.5px;color:#374151;background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;" onchange="renderPayments(this.value)">
+            <option>All time</option><option>This month</option><option>Last month</option>
+          </select>
+        </div>
+        <div id="txn-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA ─────────────────────────────────────────────────
+const TUTORS = [
+  {id:1, name:"Teacher Khadra",     rating:4.9,reviews:142,language:"Somali", price:15,subject:"Quran",          color:"#1a4a7a",bio:"Certified Quran teacher with 8 years experience. Specializes in Tajweed and Hifz for all ages.",students:230,lessons:1840,badge:"Top Rated",
+   about:"I have been teaching the Holy Quran for over 8 years to students of all ages, from young children to adults. My teaching method focuses on proper Tajweed rules, Makharij (pronunciation), and memorization techniques. I hold a certification from a recognized Islamic institute and have helped over 230 students improve their Quran recitation.",
+   specialties:["Tajweed Rules","Hifz (Memorization)","Quran for Beginners","Arabic Letters"],
+   availability:{Mon:["9 AM","10 AM","2 PM","4 PM"],Tue:["9 AM","3 PM","5 PM"],Wed:["10 AM","2 PM"],Thu:["9 AM","11 AM","4 PM"],Fri:[],Sat:["10 AM","12 PM","2 PM","4 PM"],Sun:["2 PM","4 PM"]},
+   reviews:[{name:"Halima A.",rating:5,date:"2 weeks ago",text:"Teacher Khadra is amazing! My son's Quran reading improved so much in just 2 months. Very patient and encouraging.",avatar:"H",color:"#7c3aed"},{name:"Abdi M.",rating:5,date:"1 month ago",text:"Excellent teacher. She explains Tajweed rules very clearly and makes it easy to understand. Highly recommend!",avatar:"A",color:"#2563eb"},{name:"Faadumo I.",rating:4,date:"2 months ago",text:"Great lessons, very professional. My daughter looks forward to every class. The only reason for 4 stars is scheduling can sometimes be difficult.",avatar:"F",color:"#059669"}]},
+  {id:2, name:"Teacher Hodan",      rating:4.8,reviews:98, language:"Somali", price:12,subject:"Quran",          color:"#0e4d6e",bio:"Patient and nurturing Quran teacher for children and adults. Focuses on correct pronunciation.",students:180,lessons:1200,badge:"Popular",
+   about:"My teaching approach is gentle, patient and encouraging. I specialize in teaching Quran to beginners and young children, making the learning process fun and engaging. I use visual aids and repetition techniques to help students retain what they learn.",
+   specialties:["Kids Quran","Beginner Recitation","Pronunciation","Islamic Studies"],
+   availability:{Mon:["8 AM","10 AM","3 PM"],Tue:["9 AM","11 AM","4 PM"],Wed:["8 AM","2 PM","5 PM"],Thu:["10 AM","3 PM"],Fri:[],Sat:["9 AM","11 AM","3 PM"],Sun:["10 AM","3 PM"]},
+   reviews:[{name:"Omar H.",rating:5,date:"3 weeks ago",text:"My 6-year-old loves her classes! Teacher Hodan is so patient and makes learning fun. Best Quran teacher we have had.",avatar:"O",color:"#b45309"},{name:"Sahra K.",rating:5,date:"6 weeks ago",text:"Very professional and caring. My kids always look forward to their sessions. Highly recommended for families.",avatar:"S",color:"#be123c"}]},
+  {id:3, name:"Teacher Maryam",     rating:4.9,reviews:176,language:"Arabic", price:20,subject:"Quran",          color:"#164e63",bio:"Hafidha with ijaza in Quran recitation. Teaches Quran with full Tajweed rules.",students:310,lessons:2400,badge:"Top Rated",about:"I am a Hafidha (one who has memorized the entire Quran) and hold an ijaza (chain of narration) in Quran recitation. I have been teaching Quran for 10 years across multiple countries. My lessons are structured, rigorous and rewarding.",specialties:["Advanced Tajweed","Ijaza Program","Quran Memorization","Quran for Adults"],availability:{Mon:["10 AM","2 PM","6 PM"],Tue:["10 AM","12 PM","4 PM"],Wed:["2 PM","6 PM"],Thu:["10 AM","12 PM","6 PM"],Fri:[],Sat:["11 AM","3 PM","5 PM"],Sun:["12 PM","4 PM"]},reviews:[{name:"Yusuf A.",rating:5,date:"1 week ago",text:"Incredible teacher. I completed my first juz with proper Tajweed in 3 months. Her knowledge is unmatched.",avatar:"Y",color:"#6d28d9"},{name:"Nimo B.",rating:5,date:"1 month ago",text:"Teacher Maryam is the best Quran teacher I have ever had. She corrects every mistake and explains why. Worth every penny.",avatar:"N",color:"#1a4a7a"}]},
+  {id:4, name:"Teacher Idil",       rating:4.7,reviews:64, language:"Somali", price:10,subject:"Quran",          color:"#1e4976",bio:"Friendly beginner-focused Quran teacher. Great for kids starting their Quran journey.",students:95,lessons:620,badge:"New",about:"I am a new tutor but passionate about teaching. I focus on making Quran learning accessible and enjoyable for young beginners. My lessons are interactive and tailored to each student's pace.",specialties:["Complete Beginners","Children 4-10","Arabic Alphabet","Basic Recitation"],availability:{Mon:["3 PM","5 PM"],Tue:["4 PM","6 PM"],Wed:["3 PM","5 PM"],Thu:["4 PM","6 PM"],Fri:[],Sat:["10 AM","12 PM","2 PM","4 PM"],Sun:["2 PM","4 PM","6 PM"]},reviews:[{name:"Caasha M.",rating:5,date:"1 month ago",text:"My son started from zero and now he can read Surah Al-Fatiha perfectly. Teacher Idil is very encouraging.",avatar:"C",color:"#2d6a4f"},{name:"Bile A.",rating:4,date:"2 months ago",text:"Good teacher, very patient with my daughter. Would like more flexible scheduling.",avatar:"B",color:"#b45309"}]},
+  {id:5, name:"Teacher Faadumo",    rating:4.8,reviews:112,language:"Somali", price:14,subject:"Somali Language",color:"#2d6a4f",bio:"Native Somali speaker teaching reading, writing and conversation for diaspora children.",students:200,lessons:1560,badge:"Top Rated",about:"As a native Somali speaker raised in Mogadishu and now living abroad, I understand the challenges diaspora families face in passing on the Somali language. I use culturally rich content, stories, and songs to make learning feel natural and meaningful.",specialties:["Somali Reading","Somali Writing","Conversation","Diaspora Children"],availability:{Mon:["10 AM","12 PM","4 PM"],Tue:["9 AM","3 PM","5 PM"],Wed:["10 AM","2 PM","4 PM"],Thu:["9 AM","11 AM","3 PM"],Fri:[],Sat:["10 AM","12 PM","2 PM"],Sun:["3 PM","5 PM"]},reviews:[{name:"Warsan H.",rating:5,date:"2 weeks ago",text:"My children were born here and could barely speak Somali. After 3 months with Teacher Faadumo they are having full conversations!",avatar:"W",color:"#7c3aed"},{name:"Khalid A.",rating:5,date:"1 month ago",text:"Excellent teacher. Very cultural, uses stories and poetry. My kids love it.",avatar:"K",color:"#b45309"}]},
+  {id:6, name:"Teacher Caasha",     rating:4.7,reviews:87, language:"Somali", price:11,subject:"Somali Language",color:"#1b4332",bio:"Engaging Somali language teacher using storytelling and songs to make learning fun.",students:145,lessons:980,badge:"Popular",about:"I believe language learning should be joyful. I use traditional Somali poetry, folk tales, songs and games to make my lessons come alive. Suitable for all ages.",specialties:["Somali Poetry","Folk Tales","Songs & Rhymes","Oral Tradition"],availability:{Mon:["9 AM","2 PM"],Tue:["10 AM","4 PM","6 PM"],Wed:["9 AM","2 PM","5 PM"],Thu:["10 AM","4 PM"],Fri:[],Sat:["11 AM","1 PM","3 PM"],Sun:["2 PM","4 PM"]},reviews:[{name:"Deeqa S.",rating:5,date:"3 weeks ago",text:"Teacher Caasha brings Somali culture alive in every lesson. My son asks for extra classes!",avatar:"D",color:"#be123c"}]},
+  {id:7, name:"Teacher Sahra",      rating:4.6,reviews:53, language:"Somali", price:10,subject:"Somali Language",color:"#386641",bio:"Specializes in teaching Somali to second-generation children living abroad.",students:88,lessons:540,badge:null,about:"I work specifically with second-generation Somali children who understand some Somali at home but cannot read or write. My curriculum bridges the home language with formal Somali literacy.",specialties:["Literacy Skills","Heritage Language","Reading & Writing","Grammar"],availability:{Mon:["3 PM","5 PM","7 PM"],Tue:["4 PM","6 PM"],Wed:["3 PM","5 PM"],Thu:["4 PM","7 PM"],Fri:[],Sat:["10 AM","12 PM","2 PM","4 PM"],Sun:["3 PM","5 PM"]},reviews:[{name:"Liban M.",rating:5,date:"5 weeks ago",text:"My daughter can now read Somali! We are so happy. Teacher Sahra is dedicated and professional.",avatar:"L",color:"#6d28d9"}]},
+  {id:8, name:"Teacher Deeqa",      rating:4.9,reviews:201,language:"Somali", price:18,subject:"Somali Language",color:"#3a5a40",bio:"Award-winning Somali language educator. Curriculum developer and published author.",students:380,lessons:2900,badge:"Top Rated",about:"I am an award-winning Somali language educator with a Masters in Linguistics. I have developed curriculum for Somali schools in three countries and published two books on Somali language pedagogy. My lessons are structured, evidence-based and transformative.",specialties:["Advanced Somali","Grammar & Syntax","Literature","Teacher Training"],availability:{Mon:["10 AM","12 PM","2 PM"],Tue:["10 AM","12 PM","3 PM"],Wed:["10 AM","2 PM"],Thu:["10 AM","12 PM","2 PM","4 PM"],Fri:[],Sat:["11 AM","1 PM"],Sun:["12 PM","2 PM"]},reviews:[{name:"Ifrah O.",rating:5,date:"1 week ago",text:"Teacher Deeqa is in a different league. Her lessons are academic, structured and incredibly effective.",avatar:"I",color:"#1a4a7a"},{name:"Ahmed N.",rating:5,date:"3 weeks ago",text:"My Somali writing went from basic to fluent in 4 months. Worth every penny.",avatar:"A",color:"#b45309"},{name:"Hodan A.",rating:5,date:"2 months ago",text:"Best Somali teacher available anywhere online. Period.",avatar:"H",color:"#be123c"}]},
+  {id:9, name:"Teacher Omar",       rating:4.8,reviews:133,language:"Arabic", price:18,subject:"Arabic",         color:"#b45309",bio:"Egyptian-trained Arabic teacher. MSA and Fusha Arabic for all levels.",students:220,lessons:1700,badge:"Popular",about:"Trained at Al-Azhar University in Cairo, I bring authentic Arabic language instruction to students worldwide. I teach Modern Standard Arabic (MSA), Classical Arabic, and conversational Levantine dialect.",specialties:["MSA Arabic","Classical Arabic","Grammar","Conversation"],availability:{Mon:["9 AM","11 AM","3 PM","5 PM"],Tue:["9 AM","2 PM","5 PM"],Wed:["10 AM","1 PM","4 PM"],Thu:["9 AM","11 AM","3 PM"],Fri:[],Sat:["10 AM","12 PM","2 PM"],Sun:["11 AM","3 PM","5 PM"]},reviews:[{name:"Sagal A.",rating:5,date:"2 weeks ago",text:"Teacher Omar explains Arabic grammar better than anyone I have studied with. Very knowledgeable.",avatar:"S",color:"#6d28d9"},{name:"Bile H.",rating:5,date:"1 month ago",text:"My Arabic went from basic to conversational in 6 months. Excellent structured lessons.",avatar:"B",color:"#2563eb"}]},
+  {id:10,name:"Teacher Yusuf",      rating:4.7,reviews:79, language:"Somali", price:15,subject:"Arabic",         color:"#92400e",bio:"Bilingual Arabic-Somali teacher making Arabic accessible to Somali learners.",students:130,lessons:890,badge:null,about:"As a bilingual Somali-Arabic speaker, I bridge the gap for Somali students learning Arabic. I explain Arabic concepts using Somali language parallels, making it much easier to understand.",specialties:["Arabic for Somalis","Quranic Arabic","Vocabulary Building","Reading"],availability:{Mon:["2 PM","4 PM","6 PM"],Tue:["3 PM","5 PM"],Wed:["2 PM","4 PM","7 PM"],Thu:["3 PM","5 PM"],Fri:[],Sat:["10 AM","12 PM","2 PM","4 PM"],Sun:["2 PM","4 PM","6 PM"]},reviews:[{name:"Maryam F.",rating:5,date:"4 weeks ago",text:"Finally an Arabic teacher who explains things in Somali! So much easier to understand. Highly recommend.",avatar:"M",color:"#2d6a4f"}]},
+  {id:11,name:"Teacher Nimo",       rating:4.9,reviews:158,language:"Arabic", price:22,subject:"Arabic",         color:"#78350f",bio:"PhD in Arabic linguistics. Advanced grammar, literature and conversation.",students:270,lessons:2100,badge:"Top Rated",about:"I hold a PhD in Arabic Linguistics and have taught Arabic at university level for 6 years. I specialize in advanced grammar, Arabic literature, and academic Arabic writing.",specialties:["Advanced Grammar","Arabic Literature","Academic Writing","Linguistics"],availability:{Mon:["10 AM","12 PM","3 PM"],Tue:["10 AM","1 PM","4 PM"],Wed:["11 AM","2 PM"],Thu:["10 AM","12 PM","3 PM","5 PM"],Fri:[],Sat:["11 AM","1 PM","3 PM"],Sun:["12 PM","2 PM","4 PM"]},reviews:[{name:"Khalid Y.",rating:5,date:"1 week ago",text:"Dr. Nimo is exceptional. Her knowledge of Arabic linguistics is extraordinary. Perfect for advanced learners.",avatar:"K",color:"#1a4a7a"},{name:"Liban S.",rating:5,date:"3 weeks ago",text:"The best Arabic teacher I have ever had. Her explanations of complex grammar are crystal clear.",avatar:"L",color:"#be123c"}]},
+  {id:12,name:"Teacher Abdirahman", rating:4.6,reviews:44, language:"Somali", price:12,subject:"Arabic",         color:"#a16207",bio:"Enthusiastic Arabic teacher for beginners. Fun visual methods for quick learning.",students:70,lessons:380,badge:"New",about:"I make Arabic fun! I use colourful flashcards, visual charts and interactive games to help beginners quickly grasp the Arabic alphabet and basic vocabulary.",specialties:["Arabic Alphabet","Beginner Arabic","Visual Learning","Basic Vocabulary"],availability:{Mon:["3 PM","5 PM","7 PM"],Tue:["4 PM","6 PM"],Wed:["3 PM","6 PM"],Thu:["4 PM","7 PM"],Fri:[],Sat:["10 AM","12 PM","2 PM","4 PM","6 PM"],Sun:["2 PM","4 PM","6 PM"]},reviews:[{name:"Idil A.",rating:5,date:"6 weeks ago",text:"My son went from not knowing a single Arabic letter to reading basic words in 2 months. Amazing!",avatar:"I",color:"#2d6a4f"}]},
+  {id:13,name:"Teacher Amina",      rating:4.8,reviews:167,language:"English",price:16,subject:"English",        color:"#6d28d9",bio:"IELTS & TOEFL specialist. Helped 200+ students achieve their target band scores.",students:290,lessons:2200,badge:"Popular",about:"I am a certified IELTS and TOEFL examiner with 7 years of experience. I have helped over 200 students achieve their target scores for university admission and immigration purposes. My lessons are exam-focused and results-driven.",specialties:["IELTS Preparation","TOEFL Preparation","Academic English","Writing Skills"],availability:{Mon:["9 AM","11 AM","2 PM","5 PM"],Tue:["9 AM","12 PM","4 PM"],Wed:["10 AM","1 PM","3 PM","6 PM"],Thu:["9 AM","11 AM","2 PM","5 PM"],Fri:["10 AM","12 PM"],Sat:["10 AM","12 PM","2 PM"],Sun:["11 AM","2 PM","4 PM"]},reviews:[{name:"Omar F.",rating:5,date:"2 weeks ago",text:"I got 7.5 in IELTS! Teacher Amina's preparation course was perfect. She knows exactly what examiners look for.",avatar:"O",color:"#b45309"},{name:"Hodan M.",rating:5,date:"1 month ago",text:"Improved my score from 5.5 to 7.0 in 3 months. Incredible teacher.",avatar:"H",color:"#2563eb"}]},
+  {id:14,name:"Teacher Warsan",     rating:4.7,reviews:91, language:"Somali", price:13,subject:"English",        color:"#5b21b6",bio:"English teacher for Somali families. Covers school curriculum and homework help.",students:160,lessons:1050,badge:null,about:"I specialize in supporting Somali children with UK and US school curriculum. I help with homework, exam preparation, and general English skills. I understand the specific challenges Somali students face.",specialties:["Homework Help","School Curriculum","Reading & Writing","SATs/GCSEs"],availability:{Mon:["3 PM","5 PM","7 PM"],Tue:["3 PM","5 PM"],Wed:["4 PM","6 PM"],Thu:["3 PM","5 PM","7 PM"],Fri:["4 PM","6 PM"],Sat:["10 AM","12 PM","2 PM","4 PM"],Sun:["2 PM","4 PM","6 PM"]},reviews:[{name:"Deeqa O.",rating:5,date:"3 weeks ago",text:"My son's grades improved dramatically. Teacher Warsan explains things in a way he understands. Wonderful teacher.",avatar:"D",color:"#be123c"}]},
+  {id:15,name:"Teacher Ifrah",      rating:4.9,reviews:188,language:"English",price:20,subject:"English",        color:"#4c1d95",bio:"Cambridge-certified English teacher. Business English and academic writing expert.",students:330,lessons:2600,badge:"Top Rated",about:"I am a Cambridge CELTA and DELTA certified English teacher with 9 years of experience. I specialize in Business English, academic writing, and professional communication for adults in careers.",specialties:["Business English","Academic Writing","Presentation Skills","Professional English"],availability:{Mon:["8 AM","10 AM","12 PM","2 PM","4 PM"],Tue:["8 AM","10 AM","2 PM","5 PM"],Wed:["9 AM","11 AM","3 PM"],Thu:["8 AM","10 AM","12 PM","4 PM"],Fri:["9 AM","11 AM"],Sat:["10 AM","12 PM"],Sun:["12 PM","2 PM"]},reviews:[{name:"Yusuf B.",rating:5,date:"1 week ago",text:"My business presentations improved massively. Teacher Ifrah gives excellent feedback on writing and speaking.",avatar:"Y",color:"#b45309"},{name:"Sagal M.",rating:5,date:"1 month ago",text:"Best English teacher for professionals. She helped me prepare for a very important job interview. I got the job!",avatar:"S",color:"#2d6a4f"},{name:"Abdi F.",rating:5,date:"6 weeks ago",text:"My academic writing went from average to excellent. I got an A on my university essay.",avatar:"A",color:"#1a4a7a"}]},
+  {id:16,name:"Teacher Bile",       rating:4.6,reviews:38, language:"Somali", price:10,subject:"English",        color:"#7c3aed",bio:"Passionate about helping new arrivals build English confidence for daily life.",students:60,lessons:310,badge:"New",about:"I work with newly arrived Somali families to help them build practical English skills for everyday life - shopping, healthcare, schools, and work. My lessons are conversational and practical.",specialties:["Everyday English","Conversation Practice","New Arrivals","Practical Skills"],availability:{Mon:["4 PM","6 PM","8 PM"],Tue:["5 PM","7 PM"],Wed:["4 PM","6 PM","8 PM"],Thu:["5 PM","7 PM"],Fri:["4 PM","6 PM"],Sat:["10 AM","12 PM","2 PM","4 PM","6 PM"],Sun:["2 PM","4 PM","6 PM","8 PM"]},reviews:[{name:"Nimo A.",rating:5,date:"2 months ago",text:"Teacher Bile helped my mother learn English for her doctor appointments. Life changing. Thank you.",avatar:"N",color:"#2563eb"}]},
+  {id:17,name:"Teacher Ahmed",      rating:4.8,reviews:144,language:"Somali", price:17,subject:"Mathematics",    color:"#be123c",bio:"Maths teacher for GCSE, A-Level and university entrance. 95% pass rate.",students:245,lessons:1950,badge:"Popular",about:"I have a BSc in Mathematics and 6 years of tutoring experience. I specialize in GCSE and A-Level mathematics, with a 95% pass rate among my students. I make complex topics simple.",specialties:["GCSE Maths","A-Level Maths","Algebra","Statistics"],availability:{Mon:["9 AM","11 AM","3 PM","5 PM"],Tue:["10 AM","2 PM","5 PM"],Wed:["9 AM","11 AM","4 PM"],Thu:["10 AM","1 PM","4 PM","6 PM"],Fri:["10 AM","12 PM"],Sat:["9 AM","11 AM","1 PM","3 PM"],Sun:["2 PM","4 PM"]},reviews:[{name:"Khadra M.",rating:5,date:"2 weeks ago",text:"My son was failing maths. After 2 months with Teacher Ahmed he passed his GCSE with a B! Amazing.",avatar:"K",color:"#2d6a4f"},{name:"Omar I.",rating:5,date:"1 month ago",text:"Very patient, explains everything step by step. Exactly what I needed for A-Level.",avatar:"O",color:"#6d28d9"}]},
+  {id:18,name:"Teacher Liban",      rating:4.7,reviews:76, language:"Somali", price:14,subject:"Mathematics",    color:"#9f1239",bio:"Makes maths fun and easy to understand. Primary and secondary level specialist.",students:125,lessons:830,badge:null,about:"I use fun visual methods, real-life examples and games to make mathematics engaging for young learners. I specialize in primary and lower secondary school mathematics.",specialties:["Primary Maths","Mental Arithmetic","Times Tables","Problem Solving"],availability:{Mon:["3 PM","5 PM","7 PM"],Tue:["3 PM","5 PM"],Wed:["4 PM","6 PM"],Thu:["3 PM","5 PM","7 PM"],Fri:["3 PM","5 PM"],Sat:["10 AM","12 PM","2 PM","4 PM"],Sun:["2 PM","4 PM","6 PM"]},reviews:[{name:"Faadumo H.",rating:5,date:"4 weeks ago",text:"My daughter used to cry about maths. Now she loves it! Teacher Liban has a gift for teaching.",avatar:"F",color:"#b45309"}]},
+  {id:19,name:"Teacher Sagal",      rating:4.9,reviews:195,language:"English",price:25,subject:"Mathematics",    color:"#881337",bio:"Oxford-educated mathematician. Specialist in advanced calculus and statistics.",students:350,lessons:2750,badge:"Top Rated",about:"I graduated from Oxford University with a First Class degree in Mathematics. I specialize in advanced mathematics including calculus, statistics, linear algebra and university-level mathematics.",specialties:["Advanced Calculus","Statistics","Linear Algebra","University Maths"],availability:{Mon:["10 AM","12 PM","2 PM","5 PM"],Tue:["10 AM","12 PM","3 PM"],Wed:["10 AM","1 PM","4 PM"],Thu:["10 AM","12 PM","2 PM","5 PM"],Fri:["11 AM","1 PM"],Sat:["11 AM","1 PM","3 PM"],Sun:["12 PM","2 PM","4 PM"]},reviews:[{name:"Ahmed B.",rating:5,date:"1 week ago",text:"Teacher Sagal is on another level. She made me understand calculus in a way my university professor never could.",avatar:"A",color:"#1a4a7a"},{name:"Bile O.",rating:5,date:"3 weeks ago",text:"I was failing statistics. After 6 sessions I was top of my class. Absolutely brilliant.",avatar:"B",color:"#7c3aed"},{name:"Warsan A.",rating:5,date:"1 month ago",text:"Worth every penny. The best maths tutor money can buy.",avatar:"W",color:"#2d6a4f"}]},
+  {id:20,name:"Teacher Khalid",     rating:4.6,reviews:49, language:"Arabic", price:12,subject:"Mathematics",    color:"#b91c1c",bio:"Fun and patient maths tutor for young learners aged 6–14.",students:80,lessons:420,badge:"New",about:"I love working with young children to build their confidence in mathematics. My lessons use lots of games, puzzles and visual aids to make numbers fun and accessible.",specialties:["Ages 6-10","Ages 11-14","Basic Numeracy","Fun Games"],availability:{Mon:["4 PM","6 PM"],Tue:["4 PM","6 PM","8 PM"],Wed:["3 PM","5 PM","7 PM"],Thu:["4 PM","6 PM"],Fri:["4 PM","6 PM"],Sat:["10 AM","12 PM","2 PM","4 PM","6 PM"],Sun:["2 PM","4 PM","6 PM"]},reviews:[{name:"Caasha A.",rating:5,date:"7 weeks ago",text:"My 8 year old loves maths now! Teacher Khalid is so fun and patient.",avatar:"C",color:"#059669"}]},
+];
+
+const SUBJECTS = ["All","Quran","Somali Language","Arabic","English","Mathematics"];
+const S_COLOR = {Quran:"#1a4a7a","Somali Language":"#2d6a4f",Arabic:"#b45309",English:"#6d28d9",Mathematics:"#be123c"};
+const S_ICON  = {All:"📚",Quran:"🕌","Somali Language":"🇸🇴",Arabic:"🌙",English:"📖",Mathematics:"📐"};
+const DAYS = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+
+let currentUser = null;
+let selectedTutor = TUTORS[0];
+let selectedPayment = "card";
+let selectedSlot = "4:30 PM - 5:00 PM";
+let isBooked = false;
+let activeSubject = "All";
+let userRole = "student";
+let profileTutor = null;
+let profileSelectedDay = null;
+let profileSelectedTime = null;
+let profilePayment = "card";
+let profileBooked = false;
+
+// ── HELPERS ──────────────────────────────────────────────
+function av(name, color, size, fontSize) {
+  return `<div class="avatar" style="width:${size}px;height:${size}px;font-size:${fontSize}px;background:${color};">${name[0]}</div>`;
+}
+function stars(r, size) {
+  size = size||12;
+  return `<span style="color:#f5a623;font-size:${size}px;">${'★'.repeat(Math.floor(r))}<span style="color:#ddd">${'★'.repeat(5-Math.floor(r))}</span></span>`;
+}
+function bdg(text) {
+  if (!text) return '';
+  const cls = text==='Top Rated'?'badge-top':text==='Popular'?'badge-popular':'badge-new';
+  return `<span class="badge ${cls}">${text}</span>`;
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+// ── PAGE NAV ─────────────────────────────────────────────
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(name+'-page').classList.add('active');
+}
+function setNav(btn) {
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ── AUTH ─────────────────────────────────────────────────
+function togglePass(id,btn){const i=document.getElementById(id);i.type=i.type==='password'?'text':'password';btn.textContent=i.type==='password'?'👁️':'🙈';}
+function setRole(r){userRole=r;document.getElementById('role-student').classList.toggle('active',r==='student');document.getElementById('role-tutor').classList.toggle('active',r==='tutor');}
+function updateStrength(v){const w=document.getElementById('strength-wrap');w.style.display=v.length>0?'block':'none';[1,2,3,4].forEach(i=>{document.getElementById('s'+i).classList.toggle('on',v.length>=i*2);});const l=document.getElementById('strength-label');l.textContent=(v.length<4?'Too short':v.length<6?'Weak':v.length<8?'Good':'Strong')+' password';l.style.color=v.length>=8?'#22c55e':'#94a3b8';}
+function showErr(id,msg){const e=document.getElementById(id);e.textContent='⚠️ '+msg;e.style.display='block';}
+
+function doLogin(){
+  const email=document.getElementById('login-email').value.trim();
+  const pass=document.getElementById('login-pass').value;
+  document.getElementById('login-error').style.display='none';
+  if(!email||!pass){showErr('login-error','Please fill in all fields.');return;}
+  if(!email.includes('@')){showErr('login-error','Please enter a valid email.');return;}
+  const btn=document.getElementById('login-btn');btn.textContent='Signing in...';btn.disabled=true;
+  setTimeout(()=>{btn.textContent='Sign In →';btn.disabled=false;currentUser={name:email.split('@')[0],email};enterDashboard();},1100);
+}
+function doSignup(){
+  const name=document.getElementById('signup-name').value.trim();
+  const email=document.getElementById('signup-email').value.trim();
+  const pass=document.getElementById('signup-pass').value;
+  document.getElementById('signup-error').style.display='none';
+  if(!name||!email||!pass){showErr('signup-error','Please fill in all fields.');return;}
+  if(!email.includes('@')){showErr('signup-error','Please enter a valid email.');return;}
+  if(pass.length<6){showErr('signup-error','Password must be at least 6 characters.');return;}
+  const btn=document.getElementById('signup-btn');btn.textContent='Creating account...';btn.disabled=true;
+  setTimeout(()=>{btn.textContent='Create Free Account →';btn.disabled=false;currentUser={name,email};enterDashboard();},1100);
+}
+function doLogout(){currentUser=null;showPage('login');}
+
+// ── DASHBOARD ────────────────────────────────────────────
+function enterDashboard(){
+  const first=currentUser.name.charAt(0).toUpperCase()+currentUser.name.slice(1);
+  document.getElementById('topbar-avatar').textContent=first[0];
+  document.getElementById('topbar-avatar').style.background='#7c3aed';
+  document.getElementById('topbar-name').textContent=first;
+  document.getElementById('welcome-msg').textContent='Welcome back, '+first+'! 👋';
+  document.getElementById('live-avatar').textContent=first[0];
+  document.getElementById('live-name').textContent=first;
+  buildSubjectPills();
+  buildUpcoming();
+  filterTutors();
+  showPage('dashboard');
+}
+
+// Login pills
+document.getElementById('login-pills').innerHTML=["🕌 Quran & Tajweed","🇸🇴 Somali Language","🌙 Arabic","📖 English","📐 Mathematics"].map(f=>`<div style="background:rgba(255,255,255,0.1);border-radius:50px;padding:9px 20px;margin-bottom:8px;color:#fff;font-size:13.5px;border:1px solid rgba(255,255,255,0.15);">${f}</div>`).join('');
+
+function buildSubjectPills(){
+  document.getElementById('subject-pills').innerHTML=SUBJECTS.map(s=>{
+    const active=activeSubject===s;
+    const bg=active?(S_COLOR[s]||'#2563eb'):'#fff';
+    return `<button class="pill${active?' active':''}" onclick="setSubject('${s}')" style="background:${bg};color:${active?'#fff':'#64748b'};${active?'border:none;':''}">${S_ICON[s]} ${s}</button>`;
+  }).join('');
+}
+
+function buildUpcoming(){
+  document.getElementById('upcoming-list').innerHTML=TUTORS.slice(0,2).map(t=>`
+    <div style="display:flex;align-items:center;gap:7px;margin-bottom:7px;">
+      ${av(t.name,t.color,30,12)}
+      <div><div style="font-weight:600;font-size:11.5px;color:#1e293b;">${t.name}</div><div style="font-size:10px;color:#64748b;">$${t.price}/hr · ${t.subject}</div></div>
+    </div>`).join('');
+}
+
+function setSubject(s){activeSubject=s;buildSubjectPills();filterTutors();}
+
+function filterTutors(){
+  const q=(document.getElementById('search-input').value||'').toLowerCase();
+  const lang=document.getElementById('lang-filter').value;
+  const price=document.getElementById('price-filter').value;
+  const sort=document.getElementById('sort-filter').value;
+  let list=TUTORS.filter(t=>{
+    const sq=!q||t.name.toLowerCase().includes(q)||t.subject.toLowerCase().includes(q)||t.bio.toLowerCase().includes(q);
+    const ss=activeSubject==='All'||t.subject===activeSubject;
+    const sl=lang==='All Languages'||t.language===lang;
+    const sp=price==='Any Price'||(price==='Under $12'&&t.price<12)||(price==='$12–$16'&&t.price>=12&&t.price<=16)||(price==='$17–$20'&&t.price>=17&&t.price<=20)||(price==='Over $20'&&t.price>20);
+    return sq&&ss&&sl&&sp;
+  });
+  if(sort==='Top Rated') list.sort((a,b)=>b.rating-a.rating);
+  else if(sort==='Price: Low to High') list.sort((a,b)=>a.price-b.price);
+  else if(sort==='Price: High to Low') list.sort((a,b)=>b.price-a.price);
+  else list.sort((a,b)=>b.reviews-a.reviews);
+  document.getElementById('result-count').textContent=list.length+' tutor'+(list.length!==1?'s':'')+' found';
+  if(list.length===0){document.getElementById('tutor-grid').innerHTML=`<div style="grid-column:span 2;background:#fff;border-radius:14px;padding:36px;text-align:center;border:1.5px solid #e2e8f0;"><div style="font-size:36px;margin-bottom:8px;">🔍</div><div style="font-weight:600;font-size:14px;color:#475569;">No tutors found</div><div style="font-size:12.5px;color:#94a3b8;margin-top:3px;">Try adjusting your filters</div></div>`;return;}
+  document.getElementById('tutor-grid').innerHTML=list.map(t=>{
+    const sel=selectedTutor&&selectedTutor.id===t.id;
+    return `<div class="tutor-card${sel?' selected':''}" onclick="selectTutor(${t.id})">
+      <div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:9px;">
+        ${av(t.name,t.color,42,16)}
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-bottom:2px;">
+            <span style="font-weight:700;font-size:13px;color:#1e293b;">${t.name}</span>${bdg(t.badge)}
+          </div>
+          <div style="font-size:10.5px;margin-bottom:3px;">${stars(t.rating,10)} <span style="color:#64748b;">${t.rating} (${t.reviews})</span></div>
+          <span style="background:${S_COLOR[t.subject]}22;color:${S_COLOR[t.subject]};padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;">${t.subject}</span>
+          <span style="color:#94a3b8;font-size:10px;margin-left:5px;">· ${t.language}</span>
+        </div>
+      </div>
+      <p style="font-size:11.5px;color:#64748b;line-height:1.55;margin-bottom:9px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${t.bio}</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+        <div style="display:flex;gap:9px;"><span style="font-size:10px;color:#94a3b8;">👥 ${t.students}</span><span style="font-size:10px;color:#94a3b8;">📚 ${t.lessons}</span></div>
+        <span style="font-weight:700;font-size:13.5px;color:#1a4a7a;">$${t.price}<span style="font-size:10px;color:#94a3b8;font-weight:400;">/hr</span></span>
+      </div>
+      <button onclick="event.stopPropagation();openProfile(${t.id})" style="width:100%;padding:7px;background:none;border:1.5px solid #2563eb;border-radius:8px;color:#2563eb;font-size:12px;font-weight:600;cursor:pointer;">View Full Profile</button>
+    </div>`;
+  }).join('');
+}
+
+function selectTutor(id){selectedTutor=TUTORS.find(t=>t.id===id);isBooked=false;filterTutors();renderBooking();}
+
+function renderBooking(){
+  const t=selectedTutor;if(!t)return;
+  const slots=["4:30 PM - 5:00 PM","5:00 PM - 5:30 PM","6:00 PM - 6:30 PM","7:00 PM - 7:30 PM"];
+  document.getElementById('booking-panel').innerHTML=`
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;">
+      ${av(t.name,t.color,46,18)}
+      <div><div style="font-weight:700;font-size:14px;color:#1e293b;">${t.name}</div><div style="font-size:11px;">${stars(t.rating)} <span style="color:#64748b;">${t.rating} (${t.reviews})</span></div>${bdg(t.badge)}</div>
+    </div>
+    <p style="font-size:11.5px;color:#64748b;line-height:1.6;margin-bottom:10px;">${t.bio}</p>
+    <div style="display:flex;gap:7px;margin-bottom:13px;">
+      <div style="flex:1;background:#f8fafc;border-radius:8px;padding:7px;text-align:center;"><div style="font-size:14px;">👥</div><div style="font-size:9.5px;color:#64748b;font-weight:500;margin-top:1px;">${t.students} students</div></div>
+      <div style="flex:1;background:#f8fafc;border-radius:8px;padding:7px;text-align:center;"><div style="font-size:14px;">📚</div><div style="font-size:9.5px;color:#64748b;font-weight:500;margin-top:1px;">${t.lessons} lessons</div></div>
+    </div>
+    <div style="font-weight:700;font-size:12.5px;color:#1e293b;margin-bottom:6px;">Choose a time</div>
+    <select onchange="selectedSlot=this.value;isBooked=false;renderBooking();" style="width:100%;padding:8px 11px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:12.5px;margin-bottom:11px;background:#f8fafc;outline:none;font-family:'DM Sans',sans-serif;">
+      ${slots.map(s=>`<option${s===selectedSlot?' selected':''}>${s}</option>`).join('')}
+    </select>
+    <div style="font-weight:700;font-size:12.5px;color:#1e293b;margin-bottom:6px;">Payment</div>
+    ${[{k:"card",i:"💳",l:"Credit / Debit Card"},{k:"paypal",i:"🅿️",l:"PayPal"},{k:"mobile",i:"📱",l:"Mobile Money"}].map(pm=>`
+      <button class="pay-btn${selectedPayment===pm.k?' active':''}" onclick="selectedPayment='${pm.k}';renderBooking();">
+        <span style="font-size:15px;">${pm.i}</span><span style="flex:1;font-size:12.5px;font-weight:500;color:#1e293b;text-align:left;">${pm.l}</span>
+      </button>`).join('')}
+    <button onclick="isBooked=true;renderBooking();" style="width:100%;padding:12px;margin-top:5px;background:${isBooked?'#22c55e':'linear-gradient(135deg,#1a4a7a,#2563eb)'};color:#fff;border:none;border-radius:12px;font-size:13.5px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(37,99,235,0.25);margin-bottom:7px;font-family:'DM Sans',sans-serif;">
+      ${isBooked?'✓ Booked!':'Confirm &amp; Pay $'+t.price}
+    </button>
+    ${!isBooked?`<button onclick="openProfile(${t.id})" style="width:100%;padding:9px;background:none;border:1.5px solid #22c55e;border-radius:12px;font-size:12.5px;font-weight:700;cursor:pointer;color:#16a34a;font-family:'DM Sans',sans-serif;">🎁 Free Trial Lesson</button>`:''}
+  `;
+}
+
+// ── TUTOR PROFILE ─────────────────────────────────────────
+function openProfile(id){
+  profileTutor=TUTORS.find(t=>t.id===id);
+  profileSelectedDay=null; profileSelectedTime=null; profilePayment='card'; profileBooked=false;
+  const first=currentUser?currentUser.name.charAt(0).toUpperCase()+currentUser.name.slice(1):'';
+  document.getElementById('profile-topbar-avatar').textContent=first[0]||'';
+  document.getElementById('profile-topbar-avatar').style.background='#7c3aed';
+  document.getElementById('profile-topbar-name').textContent=first;
+  renderProfile();
+  showPage('profile');
+}
+
+function renderProfile(){
+  const t=profileTutor;
+  const bannerGrad=`linear-gradient(135deg, ${t.color}, ${t.color}99)`;
+  const allTimes=profileSelectedDay ? (t.availability[profileSelectedDay]||[]) : [];
+
+  document.getElementById('profile-content').innerHTML=`
+  <div class="profile-layout">
+    <!-- LEFT COLUMN -->
+    <div style="display:flex;flex-direction:column;gap:18px;">
+
+      <!-- Hero card -->
+      <div class="profile-hero">
+        <div class="profile-hero-banner" style="background:${bannerGrad};">
+          <div style="position:absolute;bottom:0;right:0;width:200px;height:100%;opacity:0.07;font-size:120px;display:flex;align-items:center;justify-content:center;">${S_ICON[t.subject]}</div>
+        </div>
+        <div class="profile-hero-content">
+          <div class="profile-avatar-wrap">
+            <div class="profile-av" style="background:${t.color};">${t.name[8]||t.name[0]}</div>
+            <div class="online-dot"></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+            <div>
+              <h1 style="font-family:'Merriweather',serif;font-size:22px;color:#1e293b;margin-bottom:4px;">${t.name}</h1>
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+                ${bdg(t.badge)}
+                <span style="background:${S_COLOR[t.subject]}22;color:${S_COLOR[t.subject]};padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700;">${S_ICON[t.subject]} ${t.subject}</span>
+                <span style="color:#64748b;font-size:13px;">🌐 ${t.language}</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;">${stars(t.rating,14)}<span style="font-weight:700;font-size:14px;color:#1e293b;">${t.rating}</span><span style="color:#64748b;font-size:13px;">(${t.reviews} reviews)</span></div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-family:'Merriweather',serif;font-size:28px;font-weight:700;color:#1a4a7a;">$${t.price}<span style="font-size:14px;color:#64748b;font-weight:400;">/hr</span></div>
+              <div style="font-size:12px;color:#22c55e;font-weight:600;">🟢 Available now</div>
+            </div>
+          </div>
+          <div class="stat-row">
+            ${[["👥",t.students,"Students"],["📚",t.lessons,"Lessons"],["⭐",t.rating,"Rating"],["✅",t.reviews,"Reviews"]].map(([ic,n,l])=>`
+              <div class="stat-item"><div style="font-size:18px;">${ic}</div><div class="stat-num">${n}</div><div class="stat-lbl">${l}</div></div>`).join('')}
+          </div>
+        </div>
+      </div>
+
+      <!-- About -->
+      <div class="section-card">
+        <div class="section-title">About ${t.name}</div>
+        <p style="font-size:14px;color:#475569;line-height:1.75;">${t.about}</p>
+      </div>
+
+      <!-- Specialties -->
+      <div class="section-card">
+        <div class="section-title">Specialties</div>
+        <div>${t.specialties.map(s=>`<span class="subject-tag" style="background:${S_COLOR[t.subject]}15;color:${S_COLOR[t.subject]};">✓ ${s}</span>`).join('')}</div>
+      </div>
+
+      <!-- Availability -->
+      <div class="section-card">
+        <div class="section-title">Availability — Click a day to see times</div>
+        <div class="availability-grid">
+          ${DAYS.map(d=>{
+            const times=t.availability[d]||[];
+            const hasSlots=times.length>0;
+            const isSelected=profileSelectedDay===d;
+            return `<div class="day-cell ${hasSlots?'avail':'unavail'}${isSelected?' selected':''}" onclick="${hasSlots?`selectDay('${d}')`:''}">
+              <div class="day-name">${d}</div>
+              <div style="font-size:13px;">${hasSlots?times.length+'✓':'—'}</div>
+            </div>`;
+          }).join('')}
+        </div>
+        ${profileSelectedDay?`
+          <div style="margin-top:14px;">
+            <div style="font-size:13px;font-weight:600;color:#374151;margin-bottom:8px;">Available times on ${profileSelectedDay}:</div>
+            <div class="time-slots">
+              ${allTimes.map(time=>`<div class="time-slot${profileSelectedTime===time?' selected':''}" onclick="selectTime('${time}')">${time}</div>`).join('')}
+            </div>
+          </div>`:'<p style="font-size:13px;color:#94a3b8;margin-top:12px;">Click a day above to see available time slots</p>'}
+      </div>
+
+      <!-- Reviews -->
+      <div class="section-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+          <div class="section-title" style="margin-bottom:0;">Student Reviews</div>
+          <div style="display:flex;align-items:center;gap:6px;">${stars(t.rating,16)}<span style="font-weight:700;font-size:16px;">${t.rating}</span><span style="color:#64748b;font-size:13px;">/ 5</span></div>
+        </div>
+        ${t.reviews.map(r=>`
+          <div class="review-item">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+              ${av(r.name,r.color,36,14)}
+              <div>
+                <div style="font-weight:600;font-size:13.5px;color:#1e293b;">${r.name}</div>
+                <div style="display:flex;align-items:center;gap:6px;">${stars(r.rating,11)}<span style="font-size:11px;color:#94a3b8;">${r.date}</span></div>
+              </div>
+            </div>
+            <p style="font-size:13.5px;color:#475569;line-height:1.65;">"${r.text}"</p>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: Booking -->
+    <div class="book-sidebar">
+      <div class="book-card">
+        <div style="font-family:'Merriweather',serif;font-size:17px;font-weight:700;color:#1e293b;margin-bottom:4px;">Book a Lesson</div>
+        <div style="font-size:13px;color:#64748b;margin-bottom:16px;">with ${t.name}</div>
+        <div style="background:#f8fafc;border-radius:10px;padding:12px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;">
+          <div><div style="font-size:12px;color:#64748b;">Hourly rate</div><div style="font-family:'Merriweather',serif;font-size:22px;font-weight:700;color:#1a4a7a;">$${t.price}</div></div>
+          <div style="text-align:right;"><div style="font-size:12px;color:#22c55e;font-weight:600;">🟢 Available</div><div style="font-size:11px;color:#64748b;margin-top:2px;">${t.students} students</div></div>
+        </div>
+
+        ${profileSelectedDay&&profileSelectedTime?`
+          <div style="background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:10px;padding:11px;margin-bottom:14px;font-size:13px;color:#1d4ed8;">
+            📅 ${profileSelectedDay} at ${profileSelectedTime}
+            <button onclick="profileSelectedDay=null;profileSelectedTime=null;renderProfile();" style="float:right;background:none;border:none;color:#94a3b8;cursor:pointer;font-size:12px;">✕</button>
+          </div>`:`
+          <div style="background:#fef9c3;border:1.5px solid #fef08a;border-radius:10px;padding:11px;margin-bottom:14px;font-size:12.5px;color:#92400e;">
+            📅 Select a day & time on the left to book
+          </div>`}
+
+        <div style="font-weight:700;font-size:13px;color:#1e293b;margin-bottom:8px;">Payment Method</div>
+        ${[{k:"card",i:"💳",l:"Credit / Debit Card"},{k:"paypal",i:"🅿️",l:"PayPal"},{k:"mobile",i:"📱",l:"Mobile Money"}].map(pm=>`
+          <button class="pay-btn${profilePayment===pm.k?' active':''}" onclick="profilePayment='${pm.k}';renderProfile();">
+            <span style="font-size:15px;">${pm.i}</span><span style="flex:1;font-size:12.5px;font-weight:500;color:#1e293b;text-align:left;">${pm.l}</span>
+          </button>`).join('')}
+
+        <button onclick="confirmProfileBooking();" style="width:100%;padding:13px;margin-top:8px;background:${profileBooked?'#22c55e':'linear-gradient(135deg,#1a4a7a,#2563eb)'};color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(37,99,235,0.25);margin-bottom:8px;font-family:'DM Sans',sans-serif;">
+          ${profileBooked?'✓ Lesson Booked!':'Confirm &amp; Pay $'+t.price}
+        </button>
+        <button style="width:100%;padding:11px;background:none;border:1.5px solid #22c55e;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;color:#16a34a;font-family:'DM Sans',sans-serif;">🎁 Free Trial Lesson</button>
+
+        <div style="margin-top:14px;padding-top:14px;border-top:1px solid #f1f5f9;">
+          <div style="font-size:12px;color:#64748b;text-align:center;line-height:1.6;">💬 Message ${t.name} before booking<br/><button style="background:none;border:none;color:#2563eb;font-size:12px;cursor:pointer;font-weight:600;">Send a message →</button></div>
+        </div>
+      </div>
+
+      <!-- Quick stats -->
+      <div style="background:#fff;border-radius:12px;padding:16px;border:1.5px solid #e2e8f0;">
+        <div style="font-weight:700;font-size:13px;color:#1e293b;margin-bottom:12px;">Quick Stats</div>
+        ${[["🏆","Response time","Under 1 hour"],["📅","Lessons taught",t.lessons.toLocaleString()],["👥","Active students",t.students],["🌟","Repeat students","87%"]].map(([ic,l,v])=>`
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;">
+            <span style="font-size:13px;color:#64748b;">${ic} ${l}</span>
+            <span style="font-size:13px;font-weight:600;color:#1e293b;">${v}</span>
+          </div>`).join('')}
+      </div>
+    </div>
+  </div>`;
+}
+
+function selectDay(day){profileSelectedDay=day;profileSelectedTime=null;renderProfile();}
+function selectTime(time){profileSelectedTime=time;renderProfile();}
+function confirmProfileBooking(){
+  if(!profileSelectedTime){alert('Please select a day and time first!');return;}
+  profileBooked=true;renderProfile();
+}
+
+// ── MESSAGING ─────────────────────────────────────────────
+const MSG_THREADS = [
+  {id:1,tutor:TUTORS[0],unread:2,msgs:[
+    {from:'them',text:'Assalamu Alaikum! Welcome to your first lesson preparation.',time:'Mon 9:00 AM'},
+    {from:'them',text:'Please have your Quran ready and find a quiet space.',time:'Mon 9:01 AM'},
+    {from:'me',text:'Wa Alaikum Assalam! I\'m ready. Thank you Teacher Khadra.',time:'Mon 9:05 AM'},
+    {from:'them',text:'Excellent! See you at 4:30 PM today insha\'Allah. 🌙',time:'Mon 9:06 AM'},
+  ]},
+  {id:2,tutor:TUTORS[4],unread:0,msgs:[
+    {from:'me',text:'Can we focus on Somali grammar next lesson?',time:'Tue 2:10 PM'},
+    {from:'them',text:'Absolutely! I\'ll prepare exercises on verb conjugation.',time:'Tue 2:15 PM'},
+    {from:'me',text:'Perfect, thank you!',time:'Tue 2:17 PM'},
+  ]},
+  {id:3,tutor:TUTORS[12],unread:1,msgs:[
+    {from:'them',text:'Your IELTS exam is in 3 weeks. Let\'s intensify practice.',time:'Wed 11:00 AM'},
+    {from:'me',text:'Yes please! I need help with Writing Task 2.',time:'Wed 11:05 AM'},
+    {from:'them',text:'I\'ve sent you 5 sample essays. Review them before tomorrow.',time:'Wed 3:30 PM'},
+  ]},
+  {id:4,tutor:TUTORS[8],unread:0,msgs:[
+    {from:'me',text:'Could you recommend any Arabic vocabulary apps?',time:'Thu 10:00 AM'},
+    {from:'them',text:'Try Anki with the Quran Vocabulary deck — very effective!',time:'Thu 10:20 AM'},
+  ]},
+  {id:5,tutor:TUTORS[16],unread:1,msgs:[
+    {from:'them',text:'Great progress on algebra this week! 🎉',time:'Fri 5:00 PM'},
+    {from:'them',text:'Try these 5 problems before our next session.',time:'Fri 5:02 PM'},
+  ]},
+];
+
+let activeMsgThread = MSG_THREADS[0];
+
+function openMessages(){
+  const first=currentUser?currentUser.name.charAt(0).toUpperCase()+currentUser.name.slice(1):'';
+  document.getElementById('msg-topbar-avatar').textContent=first[0]||'';
+  document.getElementById('msg-topbar-name').textContent=first;
+  renderMsgContacts();
+  renderMsgChat();
+  showPage('messages');
+}
+
+function renderMsgContacts(){
+  const totalUnread = MSG_THREADS.reduce((s,t)=>s+t.unread,0);
+  const badge = document.getElementById('msg-unread-badge');
+  badge.textContent = totalUnread>0?totalUnread:'';
+  document.getElementById('msg-contacts-list').innerHTML = MSG_THREADS.map(th=>`
+    <div class="msg-contact${th.id===activeMsgThread.id?' active':''}" onclick="selectThread(${th.id})">
+      <div class="avatar" style="width:38px;height:38px;font-size:14px;background:${th.tutor.color};">${th.tutor.name[8]||th.tutor.name[0]}</div>
+      <div class="msg-contact-info">
+        <div class="msg-contact-name">${th.tutor.name}</div>
+        <div class="msg-contact-preview">${th.msgs[th.msgs.length-1].text}</div>
+      </div>
+      ${th.unread>0?`<div class="msg-unread">${th.unread}</div>`:''}
+    </div>`).join('');
+}
+
+function selectThread(id){
+  activeMsgThread=MSG_THREADS.find(t=>t.id===id);
+  activeMsgThread.unread=0;
+  renderMsgContacts();
+  renderMsgChat();
+}
+
+function renderMsgChat(){
+  const t=activeMsgThread.tutor;
+  document.getElementById('msg-chat-header').innerHTML=`
+    <div class="avatar" style="width:36px;height:36px;font-size:14px;background:${t.color};">${t.name[8]||t.name[0]}</div>
+    <div>
+      <div style="font-weight:700;font-size:14px;color:#1e293b;">${t.name}</div>
+      <div style="font-size:11.5px;color:#22c55e;font-weight:600;">🟢 Online</div>
+    </div>
+    <div style="flex:1;"></div>
+    <button onclick="openProfile(${t.id})" style="padding:7px 14px;background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:9px;font-size:12.5px;font-weight:600;color:#1d4ed8;cursor:pointer;">View Profile</button>`;
+  const body=document.getElementById('msg-body');
+  body.innerHTML=activeMsgThread.msgs.map(m=>`
+    <div>
+      <div class="msg-bubble ${m.from}">${m.text}</div>
+      <div class="msg-time ${m.from}">${m.time}</div>
+    </div>`).join('');
+  body.scrollTop=body.scrollHeight;
+}
+
+function sendMsg(){
+  const inp=document.getElementById('msg-input');
+  const text=inp.value.trim();
+  if(!text)return;
+  activeMsgThread.msgs.push({from:'me',text,time:'Just now'});
+  inp.value='';
+  renderMsgChat();
+  setTimeout(()=>{
+    const replies=["I'll check and get back to you!","Great question! Let's cover that in our next lesson.","Absolutely, I'll prepare materials for you.","Mashallah! Keep up the great work! 🌟","See you at our next session insha'Allah."];
+    activeMsgThread.msgs.push({from:'them',text:replies[Math.floor(Math.random()*replies.length)],time:'Just now'});
+    renderMsgChat();
+  },1200);
+}
+
+// ── MY LESSONS ─────────────────────────────────────────────
+const ALL_LESSONS = [
+  {id:1,tutor:TUTORS[0],subject:'Quran',date:'18',month:'Mar',day:'Tue',time:'4:30 PM',duration:60,price:15,status:'upcoming',topic:'Surah Al-Baqarah — Tajweed Practice'},
+  {id:2,tutor:TUTORS[4],subject:'Somali Language',date:'19',month:'Mar',day:'Wed',time:'6:00 PM',duration:60,price:14,status:'upcoming',topic:'Advanced Grammar — Verb Conjugation'},
+  {id:3,tutor:TUTORS[12],subject:'English',date:'21',month:'Mar',day:'Fri',time:'10:00 AM',duration:90,price:24,status:'upcoming',topic:'IELTS Writing Task 2 — Practice Essays'},
+  {id:4,tutor:TUTORS[16],subject:'Mathematics',date:'22',month:'Mar',day:'Sat',time:'11:00 AM',duration:60,price:17,status:'upcoming',topic:'Algebra — Quadratic Equations'},
+  {id:5,tutor:TUTORS[0],subject:'Quran',date:'11',month:'Mar',day:'Tue',time:'4:30 PM',duration:60,price:15,status:'completed',topic:'Surah Al-Fatiha — Memorisation',rating:5},
+  {id:6,tutor:TUTORS[12],subject:'English',date:'7',month:'Mar',day:'Fri',time:'10:00 AM',duration:90,price:24,status:'completed',topic:'IELTS Listening Practice',rating:5},
+  {id:7,tutor:TUTORS[4],subject:'Somali Language',date:'5',month:'Mar',day:'Wed',time:'6:00 PM',duration:60,price:14,status:'completed',topic:'Conversational Somali — Daily Life',rating:4},
+  {id:8,tutor:TUTORS[8],subject:'Arabic',date:'1',month:'Mar',day:'Sat',time:'2:00 PM',duration:60,price:18,status:'completed',topic:'Arabic Alphabet — Full Review',rating:5},
+  {id:9,tutor:TUTORS[16],subject:'Mathematics',date:'28',month:'Feb',day:'Fri',time:'11:00 AM',duration:60,price:17,status:'cancelled',topic:'Statistics Introduction'},
+  {id:10,tutor:TUTORS[4],subject:'Somali Language',date:'20',month:'Feb',day:'Thu',time:'5:00 PM',duration:60,price:14,status:'cancelled',topic:'Somali Poetry — Gabay'},
+];
+
+let activeLessonsTab='upcoming';
+
+function openLessons(){
+  const first=currentUser?currentUser.name.charAt(0).toUpperCase()+currentUser.name.slice(1):'';
+  document.getElementById('lessons-topbar-avatar').textContent=first[0]||'';
+  document.getElementById('lessons-topbar-name').textContent=first;
+  renderLessons();
+  showPage('lessons');
+}
+
+function setLessonsTab(tab){
+  activeLessonsTab=tab;
+  ['upcoming','completed','cancelled'].forEach(t=>{
+    document.getElementById('lessons-tab-'+t).classList.toggle('active',t===tab);
+  });
+  renderLessons();
+}
+
+function renderLessons(){
+  const list=ALL_LESSONS.filter(l=>l.status===activeLessonsTab);
+  const statusLabel={upcoming:'Upcoming',completed:'Completed',cancelled:'Cancelled'};
+  const statusClass={upcoming:'status-upcoming',completed:'status-completed',cancelled:'status-cancelled'};
+  if(list.length===0){
+    document.getElementById('lessons-list').innerHTML=`<div style="text-align:center;padding:48px;background:#fff;border-radius:14px;border:1.5px solid #e2e8f0;"><div style="font-size:40px;margin-bottom:10px;">${activeLessonsTab==='upcoming'?'📅':activeLessonsTab==='completed'?'✅':'❌'}</div><div style="font-weight:600;font-size:14px;color:#475569;">No ${activeLessonsTab} lessons</div><div style="font-size:13px;color:#94a3b8;margin-top:4px;">${activeLessonsTab==='upcoming'?'Book a lesson to get started!':'Your lesson history will appear here.'}</div>${activeLessonsTab==='upcoming'?'<button onclick="showPage(\'dashboard\')" style="margin-top:16px;padding:10px 22px;background:linear-gradient(135deg,#1a4a7a,#2563eb);color:#fff;border:none;border-radius:10px;font-size:13.5px;font-weight:700;cursor:pointer;">Find a Tutor →</button>':''}</div>`;
+    return;
+  }
+  document.getElementById('lessons-list').innerHTML=list.map(l=>`
+    <div class="lesson-card">
+      <div class="lesson-date-box">
+        <div class="lesson-date-day">${l.date}</div>
+        <div class="lesson-date-mon">${l.month}</div>
+      </div>
+      <div class="avatar" style="width:44px;height:44px;font-size:16px;background:${l.tutor.color};">${l.tutor.name[8]||l.tutor.name[0]}</div>
+      <div class="lesson-info">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px;">
+          <span style="font-weight:700;font-size:14px;color:#1e293b;">${l.tutor.name}</span>
+          <span class="lesson-status ${statusClass[l.status]}">${statusLabel[l.status]}</span>
+        </div>
+        <div style="font-size:13px;color:#475569;margin-bottom:3px;">${l.topic}</div>
+        <div style="font-size:12px;color:#94a3b8;">${l.day} · ${l.time} · ${l.duration} min · $${l.price}</div>
+        ${l.status==='completed'&&l.rating?`<div style="margin-top:4px;color:#f5a623;font-size:13px;">${'★'.repeat(l.rating)}<span style="color:#ddd;">${'★'.repeat(5-l.rating)}</span></div>`:''}
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px;flex-shrink:0;">
+        ${l.status==='upcoming'?`
+          <button onclick="openProfile(${l.tutor.id})" style="padding:7px 14px;background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:9px;font-size:12px;font-weight:600;color:#1d4ed8;cursor:pointer;">View Profile</button>
+          <button onclick="openMessages()" style="padding:7px 14px;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:9px;font-size:12px;font-weight:600;color:#16a34a;cursor:pointer;">Message</button>`:''}
+        ${l.status==='completed'?`<button onclick="openProfile(${l.tutor.id})" style="padding:7px 14px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:9px;font-size:12px;font-weight:600;color:#64748b;cursor:pointer;">Book Again</button>`:''}
+      </div>
+    </div>`).join('');
+}
+
+// ── PAYMENTS ─────────────────────────────────────────────
+const TRANSACTIONS = [
+  {id:1,tutor:TUTORS[12],subject:'English',date:'Mar 7, 2026',amount:24,type:'paid',method:'💳',label:'IELTS Listening Practice'},
+  {id:2,tutor:TUTORS[0],subject:'Quran',date:'Mar 11, 2026',amount:15,type:'paid',method:'💳',label:'Surah Al-Fatiha'},
+  {id:3,tutor:TUTORS[4],subject:'Somali Language',date:'Mar 5, 2026',amount:14,type:'paid',method:'🅿️',label:'Conversational Somali'},
+  {id:4,tutor:TUTORS[8],subject:'Arabic',date:'Mar 1, 2026',amount:18,type:'paid',method:'💳',label:'Arabic Alphabet Review'},
+  {id:5,tutor:TUTORS[16],subject:'Mathematics',date:'Feb 28, 2026',amount:17,type:'refund',method:'💳',label:'Refund — Cancelled Lesson'},
+  {id:6,tutor:TUTORS[4],subject:'Somali Language',date:'Feb 20, 2026',amount:14,type:'refund',method:'🅿️',label:'Refund — Cancelled Lesson'},
+  {id:7,tutor:TUTORS[0],subject:'Quran',date:'Feb 18, 2026',amount:15,type:'paid',method:'📱',label:'Tajweed Foundations'},
+  {id:8,tutor:TUTORS[12],subject:'English',date:'Feb 14, 2026',amount:24,type:'paid',method:'💳',label:'IELTS Writing Task 1'},
+  {id:9,tutor:TUTORS[16],subject:'Mathematics',date:'Feb 10, 2026',amount:17,type:'paid',method:'💳',label:'Algebra Basics'},
+];
+
+function openPayments(){
+  const first=currentUser?currentUser.name.charAt(0).toUpperCase()+currentUser.name.slice(1):'';
+  document.getElementById('pay-topbar-avatar').textContent=first[0]||'';
+  document.getElementById('pay-topbar-name').textContent=first;
+  renderPayments('All time');
+  showPage('payments');
+}
+
+function renderPayments(filter){
+  const S_ICON_MAP={Quran:'🕌','Somali Language':'🇸🇴',Arabic:'🌙',English:'📖',Mathematics:'📐'};
+  let list=TRANSACTIONS;
+  if(filter==='This month') list=list.filter(t=>t.date.startsWith('Mar'));
+  if(filter==='Last month') list=list.filter(t=>t.date.startsWith('Feb'));
+  document.getElementById('txn-list').innerHTML=list.map(t=>`
+    <div class="txn-row">
+      <div class="txn-icon" style="background:${S_COLOR[t.subject]}15;">${S_ICON_MAP[t.subject]||'📚'}</div>
+      <div class="txn-info">
+        <div class="txn-name">${t.label}</div>
+        <div class="txn-sub">${t.tutor.name} · ${t.date} · ${t.method}</div>
+      </div>
+      <div class="txn-amt ${t.type}">${t.type==='refund'?'+':'−'}$${t.amount}</div>
+    </div>`).join('');
+}
+
+// INIT
+renderBooking();
 </script>
+
 </body>
 </html>
